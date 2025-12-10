@@ -35,7 +35,6 @@ public class PersonVoiceWorks {
 
     public PersonVoiceWorks() {}
 
-    // Constructor completo
     public PersonVoiceWorks(PersonDetails person, Details anime, Characters character, String role, String language) {
         this.person = person;
         this.anime = anime;
@@ -48,7 +47,6 @@ public class PersonVoiceWorks {
         }
     }
 
-    // Getters y setters
     public PersonVoiceWorksId getId() {
         return id;
     }

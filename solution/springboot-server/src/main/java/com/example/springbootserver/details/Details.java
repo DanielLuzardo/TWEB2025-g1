@@ -3,7 +3,7 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.lang.String;
 import java.util.*;
-
+import com.example.springbootserver.StringListConverter;
 import com.example.springbootserver.characterAnimeWorks.CharacterAnimeWorks;
 import com.example.springbootserver.personAnimeWorks.PersonAnimeWorks;
 import com.example.springbootserver.personVoiceWorks.PersonVoiceWorks;
@@ -57,24 +57,20 @@ public class Details {
 
     private Integer favorites;
 
-    @ElementCollection
-    @CollectionTable(name = "details_genres", joinColumns = @JoinColumn(name = "mal_id"))
-    @Column(name = "genre")
+    @Column(columnDefinition = "TEXT")
+    @Convert(converter = StringListConverter.class)
     private List<String> genres = new ArrayList<>();
 
-    @ElementCollection
-    @CollectionTable(name = "details_studios", joinColumns = @JoinColumn(name = "mal_id"))
-    @Column(name = "studio")
+    @Column(columnDefinition = "TEXT")
+    @Convert(converter = StringListConverter.class)
     private List<String> studios = new ArrayList<>();
 
-    @ElementCollection
-    @CollectionTable(name = "details_themes", joinColumns = @JoinColumn(name = "mal_id"))
-    @Column(name = "theme")
+    @Column(columnDefinition = "TEXT")
+    @Convert(converter = StringListConverter.class)
     private List<String> themes = new ArrayList<>();
 
-    @ElementCollection
-    @CollectionTable(name = "details_demographics", joinColumns = @JoinColumn(name = "mal_id"))
-    @Column(name = "demographic")
+    @Column(columnDefinition = "TEXT")
+    @Convert(converter = StringListConverter.class)
     private List<String> demographics = new ArrayList<>();
 
 
@@ -92,24 +88,20 @@ public class Details {
 
     private Integer year;
 
-    @ElementCollection
-    @CollectionTable(name = "details_producers", joinColumns = @JoinColumn(name = "mal_id"))
-    @Column(name = "producer")
+    @Column(columnDefinition = "TEXT")
+    @Convert(converter = StringListConverter.class)
     private List<String> producers = new ArrayList<>();
 
-    @ElementCollection
-    @CollectionTable(name = "details_explicit_genres", joinColumns = @JoinColumn(name = "mal_id"))
-    @Column(name = "explicit_genre")
+    @Column(columnDefinition = "TEXT")
+    @Convert(converter = StringListConverter.class)
     private List<String> explicitGenres = new ArrayList<>();
 
-    @ElementCollection
-    @CollectionTable(name = "details_licensors", joinColumns = @JoinColumn(name = "mal_id"))
-    @Column(name = "licensor")
+    @Column(columnDefinition = "TEXT")
+    @Convert(converter = StringListConverter.class)
     private List<String> licensors = new ArrayList<>();
 
-    @ElementCollection
-    @CollectionTable(name = "details_streaming", joinColumns = @JoinColumn(name = "mal_id"))
-    @Column(name = "streaming_platform")
+    @Column(columnDefinition = "TEXT")
+    @Convert(converter = StringListConverter.class)
     private List<String> streaming = new ArrayList<>();
 
     // Relations
@@ -406,5 +398,35 @@ public class Details {
 
     public void setVoiceWorks(Set<PersonVoiceWorks> voiceWorks) {
         this.voiceWorks = voiceWorks;
+    }
+
+    public void addCharacterWork(CharacterAnimeWorks work) {
+        characterWorks.add(work);
+        work.setAnime(this);
+    }
+
+    public void removeCharacterWork(CharacterAnimeWorks work) {
+        characterWorks.remove(work);
+        work.setAnime(null);
+    }
+
+    public void addPersonWork(PersonAnimeWorks work) {
+        personWorks.add(work);
+        work.setAnime(this);
+    }
+
+    public void removePersonWork(PersonAnimeWorks work) {
+        personWorks.remove(work);
+        work.setAnime(null);
+    }
+
+    public void addVoiceWork(PersonVoiceWorks work) {
+        voiceWorks.add(work);
+        work.setAnime(this);
+    }
+
+    public void removeVoiceWork(PersonVoiceWorks work) {
+        voiceWorks.remove(work);
+        work.setAnime(null);
     }
 }

@@ -133,4 +133,34 @@ public class Characters {
     public void setVoiceActors(Set<PersonVoiceWorks> voiceActors) {
         this.voiceActors = voiceActors;
     }
+
+    public void addNickname(CharacterNicknames nickname) {
+        nicknames.add(nickname);
+        nickname.setCharacter(this);
+    }
+
+    public void removeNickname(CharacterNicknames nickname) {
+        nicknames.remove(nickname);
+        nickname.setCharacter(null);
+    }
+
+    public void addAnimeWork(CharacterAnimeWorks work) {
+        animeWorks.add(work);
+        work.setCharacter(this);
+    }
+
+    public void removeAnimeWork(CharacterAnimeWorks work) {
+        animeWorks.remove(work);
+        work.setCharacter(null);
+    }
+
+    public void addVoiceActor(PersonVoiceWorks voice) {
+        voiceActors.add(voice);
+        voice.setCharacter(this);
+    }
+
+    public void removeVoiceActor(PersonVoiceWorks voice) {
+        voiceActors.remove(voice);
+        voice.setCharacter(null);
+    }
 }

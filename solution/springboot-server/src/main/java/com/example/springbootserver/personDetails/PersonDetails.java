@@ -170,4 +170,34 @@ public class PersonDetails {
     public void setVoiceWorks(Set<PersonVoiceWorks> voiceWorks) {
         this.voiceWorks = voiceWorks;
     }
+
+    public void addAlternateName(PersonAlternateName altName) {
+        alternateNames.add(altName);
+        altName.setPerson(this);
+    }
+
+    public void removeAlternateName(PersonAlternateName altName) {
+        alternateNames.remove(altName);
+        altName.setPerson(null);
+    }
+
+    public void addAnimeWork(PersonAnimeWorks work) {
+        animeWorks.add(work);
+        work.setPerson(this);
+    }
+
+    public void removeAnimeWork(PersonAnimeWorks work) {
+        animeWorks.remove(work);
+        work.setPerson(null);
+    }
+
+    public void addVoiceWork(PersonVoiceWorks work) {
+        voiceWorks.add(work);
+        work.setPerson(this);
+    }
+
+    public void removeVoiceWork(PersonVoiceWorks work) {
+        voiceWorks.remove(work);
+        work.setPerson(null);
+    }
 }
