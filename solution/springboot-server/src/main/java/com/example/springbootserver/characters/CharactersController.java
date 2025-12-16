@@ -3,7 +3,8 @@ package com.example.springbootserver.characters;
 import java.util.List;
 
 
-
+import com.example.springbootserver.characterAnimeWorks.CharacterAnimeWorks;
+import com.example.springbootserver.characterNicknames.CharacterNicknames;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,15 +21,25 @@ public class CharactersController {
         this.charactersService = charactersService;
     }
     @GetMapping("/{id}")
-    public Characters getCharacter(@PathVariable Integer id) {
+    public Characters getCharacterById(@PathVariable Integer id) {
         return charactersService.getCharacterById(id);
     }
 
- 
+    @GetMapping
+    public List<Characters> getCharacterByName(@RequestParam String name){
+        return charactersService.getCharacterByName(name);
+    }
 
-    /*@PostMapping("/characters")
-    public ResponseEntity<Characters> addCharacters(@RequestBody Characters characters){
-        Characters savedCharacters = charactersService.saveCharacters(characters);
-        return new ResponseEntity<>(savedCharacters, HttpStatus.CREATED);
-    } */
+
+    @GetMapping("/{id}/anime-works")
+    public List<CharacterAnimeWorks> getAnimeWorks(@PathVariable Integer id) {
+        return charactersService.getCharacterAnimeWorksByCharacterId(id);
+    }
+
+    @GetMapping("/{id}/nicknames")
+    public List<CharacterNicknames> getNicknames(@PathVariable Integer id) {
+        return charactersService.getCharacterNicknameByCharacterId(id);
+    }
+
+
 }

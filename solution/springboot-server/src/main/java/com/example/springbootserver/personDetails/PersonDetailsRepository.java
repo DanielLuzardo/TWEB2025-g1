@@ -1,7 +1,6 @@
 package com.example.springbootserver.personDetails;
 
 
-import com.example.springbootserver.characters.Characters;
 import com.example.springbootserver.details.Details;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

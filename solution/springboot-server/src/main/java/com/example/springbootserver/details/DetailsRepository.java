@@ -8,4 +8,6 @@ import java.util.List;
 
 @Repository
 public interface DetailsRepository extends JpaRepository<Details, Integer> {
+    List<Details> findByTitle(String title);
+
 }
