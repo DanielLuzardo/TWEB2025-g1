@@ -1,5 +1,6 @@
 package com.example.springbootserver.personAlternateName;
 import com.example.springbootserver.personDetails.PersonDetails;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -12,6 +13,7 @@ public class PersonAlternateName {
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("personMalId")
     @JoinColumn(name = "person_mal_id")
+    @JsonBackReference
     private PersonDetails person;
 
     public PersonAlternateName() {}

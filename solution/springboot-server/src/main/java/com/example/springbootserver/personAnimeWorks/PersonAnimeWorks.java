@@ -1,6 +1,7 @@
 package com.example.springbootserver.personAnimeWorks;
 import com.example.springbootserver.details.Details;
 import com.example.springbootserver.personDetails.PersonDetails;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -13,11 +14,13 @@ public class PersonAnimeWorks {
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("personMalId")
     @JoinColumn(name = "person_mal_id")
+    @JsonBackReference
     private PersonDetails person;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("animeMalId")
     @JoinColumn(name = "anime_mal_id")
+    @JsonBackReference
     private Details anime;
 
     public PersonAnimeWorks() {}

@@ -2,6 +2,7 @@ package com.example.springbootserver.characterAnimeWorks;
 
 import com.example.springbootserver.characters.Characters;
 import com.example.springbootserver.details.Details;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -14,11 +15,13 @@ public class CharacterAnimeWorks {
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("animeMalId")
     @JoinColumn(name = "anime_mal_id")
+    @JsonBackReference
     private Details anime;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("characterMalId")
     @JoinColumn(name = "character_mal_id")
+    @JsonBackReference
     private Characters character;
 
     @Column(name = "character_name")

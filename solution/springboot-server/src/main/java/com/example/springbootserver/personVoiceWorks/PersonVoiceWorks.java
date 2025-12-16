@@ -2,6 +2,7 @@ package com.example.springbootserver.personVoiceWorks;
 import com.example.springbootserver.details.Details;
 import com.example.springbootserver.personDetails.PersonDetails;
 import com.example.springbootserver.characters.Characters;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 
@@ -15,16 +16,19 @@ public class PersonVoiceWorks {
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("personMalId")
     @JoinColumn(name = "person_mal_id")
+    @JsonBackReference
     private PersonDetails person;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("animeMalId")
     @JoinColumn(name = "anime_mal_id")
+    @JsonBackReference
     private Details anime;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("characterMalId")
     @JoinColumn(name = "character_mal_id")
+    @JsonBackReference
     private Characters character;
 
     @Column(nullable = false, length = 50)

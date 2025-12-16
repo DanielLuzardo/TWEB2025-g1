@@ -1,4 +1,5 @@
 package com.example.springbootserver.characterNicknames;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import com.example.springbootserver.characters.Characters;
 import java.lang.String;
@@ -14,6 +15,7 @@ public class CharacterNicknames {
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("characterMalId")
     @JoinColumn(name = "character_mal_id")
+    @JsonBackReference
     private Characters character;
 
     public CharacterNicknames() {}

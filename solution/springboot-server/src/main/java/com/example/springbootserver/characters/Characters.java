@@ -1,4 +1,5 @@
 package com.example.springbootserver.characters;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import com.example.springbootserver.characterAnimeWorks.CharacterAnimeWorks;
 import com.example.springbootserver.characterNicknames.CharacterNicknames;
@@ -32,13 +33,16 @@ public class Characters {
     @Column(columnDefinition = "TEXT")
     private String about;
 
-    @OneToMany(mappedBy = "character", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "character", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @JsonManagedReference
     private Set<CharacterNicknames> nicknames = new HashSet<>();
 
-    @OneToMany(mappedBy = "character", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "character", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @JsonManagedReference
     private Set<CharacterAnimeWorks> animeWorks = new HashSet<>();
 
-    @OneToMany(mappedBy = "character", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "character", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @JsonManagedReference
     private Set<PersonVoiceWorks> voiceActors = new HashSet<>();
 
     public Characters() {}
