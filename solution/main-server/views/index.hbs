@@ -1,0 +1,17 @@
+<div class="container mt-5">
+    <h1>Anime Aggregator</h1>
+
+    <form id="animeForm">
+        <div class="mb-3">
+            <label for="animeName" class="form-label">Anime Name</label>
+            <input type="text" class="form-control" id="animeName" placeholder="Enter anime name" required>
+        </div>
+        <button type="button" class="btn btn-primary" onclick="sendAnimeRequest()">Search</button>
+    </form>
+
+    <div id="animeResults" class="mt-4" style="display: none;">
+        <h2 id="animeTitle"></h2>
+        <img id="animeImage" src="" alt="" class="img-fluid mb-3" style="max-width:200px; border-radius:10px;">
+        <a id="animePageLink" href="" class="btn btn-info"></a>
+    </div>
+</div>
