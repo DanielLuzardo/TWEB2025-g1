@@ -1,0 +1,28 @@
+<head>
+    <link rel="stylesheet" href="/stylesheets/personDetails.css">
+</head>
+<body>
+<div class="container-mt-4">
+
+    <div class="person-header">
+        <img src="{{person.imageUrl}}" alt="{{person.name}}">
+        <div class="person-info">
+            <h1>
+                {{person.name}}
+                {{#if person.nameKanji}}
+                    ({{person.nameKanji}})
+                {{/if}}
+            </h1>
+            <p>Birthday: {{person.birthdayFormatted}}</p>
+            <p>URL: <a href="{{person.url}}" target="_blank">{{person.url}}</a></p>
+        </div>
+    </div>
+
+
+
+
+
+
+</div>
+</body>
+</html>
