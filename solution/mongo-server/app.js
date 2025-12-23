@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const logger = require("morgan");
 const statsRouter = require("./routes/stats");
+const recommendationsRouter = require("./routes/recommendations");
 
 const app = express();
 //Middlewares execute before the requests
@@ -11,7 +12,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 //Routes
 app.use("/stats", statsRouter);
-
+app.use("/recommendations", recommendationsRouter);
 app.get("/health", (req, res) => {
   res.json({ status: "OK", server: "mongo-server" });
 });
