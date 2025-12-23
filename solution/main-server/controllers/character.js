@@ -50,4 +50,9 @@ async function getCharacter(characterId) {
     }
 }
 
-module.exports = { getCharacter };
+async function getCharacterByName(characterName) {
+    const r = await axios.get('http://localhost:8082/characters', { params: { name: characterName } });
+    return r.data;
+}
+
+module.exports = { getCharacter, getCharacterByName };

@@ -1,0 +1,21 @@
+<div id ="app">
+    <h1>Characters found</h1>
+
+    <div class="row">
+        {{#each characters}}
+            <div class="col-md-3 mb-4">
+                <a href="/characters/{{characterMalId}}" style="text-decoration:none;">
+                    <div class="card h-100">
+                        <img src="{{image}}" class="card-img-top" alt="{{name}}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{name}}</h5>
+                            {{#if nameKanji}}
+                                <p class="card-text">{{nameKanji}}</p>
+                            {{/if}}
+                        </div>
+                    </div>
+                </a>
+            </div>
+        {{/each}}
+    </div>
+</div>

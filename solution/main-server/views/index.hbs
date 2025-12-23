@@ -4,9 +4,9 @@
     <form id="animeForm">
         <div class="mb-3">
             <label for="animeName" class="form-label">Anime Name</label>
-            <input type="text" class="form-control" id="animeName" placeholder="Enter anime name" required>
+            <input name = "name" type="text" class="form-control" id="animeName" placeholder="Enter anime name" required>
         </div>
-        <button type="button" class="btn btn-primary" onclick="sendAnimeRequest()">Search</button>
+        <button type="button" onclick="sendAnimeRequest()">Search</button>
     </form>
 
     <div id="animeResults" class="mt-4" style="display: none;">
@@ -15,3 +15,4 @@
         <a id="animePageLink" href="" class="btn btn-info"></a>
     </div>
 </div>
+
