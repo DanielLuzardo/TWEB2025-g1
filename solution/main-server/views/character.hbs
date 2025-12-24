@@ -98,10 +98,10 @@
         </div>
     </div>
 
-    {{#if character.animeWorks}}
+    {{#if animeWorks}}
         <h3>Anime works</h3>
         <div class="anime-list">
-            {{#each character.animeWorks}}
+            {{#each animeWorks}}
                 <a href="/animes/{{id.animeMalId}}">
                     <div class="anime-item">
                         {{#if anime}}
@@ -119,6 +119,7 @@
             {{/each}}
         </div>
     {{/if}}
+
 
 
     {{#if character.voiceActors}}

@@ -1,9 +1,127 @@
-
 body {
-  padding: 50px;
+    background-color: #1a1a2e;
+    color: #ffffff;
     font-family: 'Poppins', sans-serif;
 }
 
-a {
-  color: #00B7FF;
+html, body {
+    overflow-x: hidden;
 }
+
+h1 {
+    color: #b084f5;
+    font-weight: 600;
+    margin-bottom: 30px;
+}
+
+form {
+    background-color: #2e2e50;
+    padding: 25px;
+    border-radius: 10px;
+}
+
+.form-label {
+    color: #ffffff;
+    font-weight: 500;
+}
+
+.form-control {
+    background-color: #1a1a2e;
+    border: 1px solid #4dabf7;
+    color: #ffffff;
+}
+
+.form-control::placeholder {
+    color: #aaa;
+}
+
+.form-control:focus {
+    background-color: #1a1a2e;
+    color: #ffffff;
+    border-color: #b084f5;
+    box-shadow: 0 0 0 0.2rem rgba(176, 132, 245, 0.25);
+}
+
+/* Botón */
+button {
+    background-color: #4dabf7;
+    border: none;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #b084f5;
+}
+
+#animeResults {
+    background-color: #2e2e50;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 30px;
+    text-align: center;
+}
+
+#animeTitle {
+    color: #ffffff;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+#animeImage {
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+#animePageLink {
+    display: inline-block;
+    margin-top: 15px;
+    border-radius: 20px;
+    background-color: #4dabf7;
+    color: #ffffff;
+    padding: 8px 20px;
+    transition: background-color 0.3s ease;
+}
+
+#animePageLink:hover {
+    background-color: #b084f5;
+    color: #ffffff;
+}
+
+.card {
+    background-color: #2e2e50;
+    border: none;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+}
+
+.card-img-top {
+    height: 260px;
+    object-fit: cover;
+}
+
+.card-body {
+    padding-top: 15px;
+    text-align: center;
+}
+
+.card-title {
+    color: #b084f5;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-size: 1.1rem;
+}
+
+.card-text {
+    color: #cccccc;
+    font-size: 0.9rem;
+}
+
