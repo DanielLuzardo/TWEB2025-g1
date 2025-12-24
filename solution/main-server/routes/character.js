@@ -34,7 +34,7 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
 
     try{
-        const animeName = (req.body.animeName || '').trim();
+        const animeName = (req.body.animeName);
 
         const characters = await getCharacterByName(animeName);
         if (!characters || characters.length === 0) {
