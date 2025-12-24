@@ -7,3 +7,13 @@ function sendAnimeRequest() {
         })
         .catch(console.error);
 }
+
+function sendPersonRequest() {
+    const personName = document.getElementById('personName').value.trim();
+
+    axios.post('/personDetails', { personName })
+        .then(response => {
+            document.body.innerHTML = response.data;
+        })
+        .catch(console.error);
+}

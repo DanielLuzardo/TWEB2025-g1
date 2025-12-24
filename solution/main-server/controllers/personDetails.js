@@ -63,4 +63,9 @@ async function getPerson(personId){
 
 }
 
-module.exports = {getPerson};
+async function getPersonByName(personName) {
+    const r = await axios.get('http://localhost:8082/personDetails', { params: { name: personName } });
+    return r.data;
+}
+
+module.exports = {getPerson, getPersonByName};
