@@ -6,10 +6,7 @@ import com.example.springbootserver.personAlternateName.PersonAlternateName;
 import com.example.springbootserver.personAnimeWorks.PersonAnimeWorks;
 import com.example.springbootserver.personVoiceWorks.PersonVoiceWorks;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,6 +24,10 @@ public class PersonDetailsController {
     @GetMapping("/{id}")
     public PersonDetails getPersonDetails(@PathVariable Integer id){
         return personDetailsService.getPersonDetailsById(id);
+    }
+    @GetMapping
+    public List<PersonDetails> getPersonDetailsByName(@RequestParam String name){
+        return personDetailsService.getPersonDetailsByName(name);
     }
     @GetMapping("/{id}/alternate-name")
     public List<PersonAlternateName> getAlternateName(@PathVariable Integer id) {

@@ -9,6 +9,15 @@
         <button type="button" onclick="sendAnimeRequest()">Search</button>
     </form>
 
+    <form id="personForm">
+        <div class="mb-3">
+            <label for="personName" class="person-label">Person Name</label>
+            <input name = "name" type="text" class="form-control" id="personName" placeholder="Enter person name" required>
+        </div>
+        <button type="button" onclick="sendAnimeRequest()">Search</button>
+    </form>
+
+
     <div id="animeResults" class="mt-4" style="display: none;">
         <h2 id="animeTitle"></h2>
         <img id="animeImage" src="" alt="" class="img-fluid mb-3" style="max-width:200px; border-radius:10px;">

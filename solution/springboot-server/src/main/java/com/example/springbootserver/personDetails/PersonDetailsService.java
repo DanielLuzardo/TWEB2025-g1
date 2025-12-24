@@ -1,6 +1,7 @@
 package com.example.springbootserver.personDetails;
 
 
+import com.example.springbootserver.characters.Characters;
 import com.example.springbootserver.characters.CharactersRepository;
 import com.example.springbootserver.personAnimeWorks.PersonAnimeWorksRepository;
 import com.example.springbootserver.personVoiceWorks.PersonVoiceWorks;
@@ -32,6 +33,10 @@ public class PersonDetailsService {
     public PersonDetails getPersonDetailsById(Integer id) {
         return personDetailsRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("No person found with id: " + id));
+    }
+
+    public List<PersonDetails> getPersonDetailsByName(String name) {
+        return personDetailsRepository.findByName(name);
     }
     public List<PersonAlternateName> getPersonAlternateNameByPersonId(Integer personId) {
         return personAlternateNameRepository.findByPerson_PersonMalId(personId);
