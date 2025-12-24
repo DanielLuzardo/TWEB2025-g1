@@ -1,6 +1,7 @@
 package com.example.springbootserver.details;
 
 import java.util.List;
+import java.util.Map;
 
 
 import com.example.springbootserver.details.DetailsService;
@@ -30,4 +31,9 @@ public class DetailsController {
         return detailsService.getDetailsByTitle(title);
     }
     */
+
+    @GetMapping("/{id}/summary")
+    public Map<String, Object> getBasicDetailsById(@PathVariable Integer id){
+        return detailsService.getBasicDetailsById(id);
+    }
 }

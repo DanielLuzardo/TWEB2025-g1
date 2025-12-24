@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.example.springbootserver.characterAnimeWorks.CharacterAnimeWorks;
 import com.example.springbootserver.characterNicknames.CharacterNicknames;
+import com.example.springbootserver.personVoiceWorks.PersonVoiceWorks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,6 +35,11 @@ public class CharactersController {
     @GetMapping("/{id}/anime-works")
     public List<CharacterAnimeWorks> getAnimeWorks(@PathVariable Integer id) {
         return charactersService.getCharacterAnimeWorksByCharacterId(id);
+    }
+
+    @GetMapping("/{id}/voice-actors")
+    public List<PersonVoiceWorks> getPersonVoiceWorks(@PathVariable Integer id) {
+        return charactersService.getPersonVoiceWorksByCharacterId(id);
     }
 
     @GetMapping("/{id}/nicknames")

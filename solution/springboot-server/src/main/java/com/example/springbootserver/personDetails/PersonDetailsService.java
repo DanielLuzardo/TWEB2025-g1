@@ -3,6 +3,7 @@ package com.example.springbootserver.personDetails;
 
 import com.example.springbootserver.characters.Characters;
 import com.example.springbootserver.characters.CharactersRepository;
+import com.example.springbootserver.details.Details;
 import com.example.springbootserver.personAnimeWorks.PersonAnimeWorksRepository;
 import com.example.springbootserver.personVoiceWorks.PersonVoiceWorks;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,9 @@ import com.example.springbootserver.personAlternateName.PersonAlternateName;
 import com.example.springbootserver.personAnimeWorks.PersonAnimeWorks;
 import com.example.springbootserver.personVoiceWorks.PersonVoiceWorksRepository;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @Service
@@ -48,4 +51,16 @@ public class PersonDetailsService {
     public List<PersonVoiceWorks> getPersonVoiceWorksByPersonId(Integer personId) {
         return personVoiceWorksRepository.findByPerson_PersonMalId(personId);
     }
+
+    public Map<String, Object> getBasicDetailsById(Integer id){
+        PersonDetails details = personDetailsRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Details not found!!"));
+
+        Map<String, Object> basicInfo = new HashMap<>();
+        basicInfo.put("name", details.getName());
+        basicInfo.put("imageUrl", details.getImageUrl());
+
+        return basicInfo;
+    }
+
 }

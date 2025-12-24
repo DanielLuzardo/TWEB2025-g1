@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/personDetails")
@@ -40,5 +41,9 @@ public class PersonDetailsController {
     @GetMapping("/{id}/voice-works")
     public List<PersonVoiceWorks> getVoiceWorks(@PathVariable Integer id) {
         return personDetailsService.getPersonVoiceWorksByPersonId(id);
+    }
+    @GetMapping("/{id}/summary")
+    public Map<String, Object> getBasicDetailsById(@PathVariable Integer id){
+        return personDetailsService.getBasicDetailsById(id);
     }
 }

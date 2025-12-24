@@ -1,17 +1,29 @@
 const express = require('express');
 const router = express.Router();
-const { getCharacter } = require('../controllers/character');
+//const { getCharacter } = require('../controllers/character');
 const {getCharacterByName} = require('../controllers/character');
+const {
+    getCharacter,
+    getCharacterAnimeWorks,
+    getPersonVoiceWorks
+} = require('../controllers/character');
 
 
 router.get('/:id', async (req, res) => {
     const characterId = req.params.id;
+
     try {
-        const characterData = await getCharacter(characterId);
+        const [character, animeWorks, voiceActors] = await Promise.all([
+            getCharacter(characterId),
+            getCharacterAnimeWorks(characterId),
+            getPersonVoiceWorks(characterId)
+        ]);
+
         res.render('character', {
-            name: characterData.details.name,
-            character: characterData.details,
-            animeWorks: characterData.animeWorks
+            name: character.name,
+            character,
+            animeWorks,
+            voiceActors
         });
     } catch (err) {
         console.error(err);

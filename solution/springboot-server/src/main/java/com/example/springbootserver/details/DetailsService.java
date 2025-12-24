@@ -3,7 +3,9 @@ package com.example.springbootserver.details;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class DetailsService {
@@ -18,6 +20,20 @@ public class DetailsService {
         return detailsRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Details not found!!"));
     }
+
+    public Map<String, Object> getBasicDetailsById(Integer id){
+        Details details = detailsRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Details not found!!"));
+
+        Map<String, Object> basicInfo = new HashMap<>();
+        basicInfo.put("title", details.getTitle());
+        basicInfo.put("imageUrl", details.getImageUrl());
+        basicInfo.put("animeMalId", details.getMalId());
+
+        return basicInfo;
+    }
+
+
 
     public List<Details> getDetailsByTitle(String title){
         return detailsRepository.findByTitle(title);
