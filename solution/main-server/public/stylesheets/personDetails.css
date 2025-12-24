@@ -20,17 +20,14 @@ body {
     align-items: flex-start;
 }
 
-/* Image */
 .person-header img {
     width: 320px;
     height: 320px;
     border-radius: 10px;
     object-fit: cover;
     flex-shrink: 0;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
 }
 
-/* Info */
 .person-info {
     flex: 1;
     min-width: 0;
@@ -48,15 +45,54 @@ body {
     opacity: 0.95;
 }
 
-/* Links */
+h3 {
+    margin-top: 30px;
+    margin-bottom: 10px;
+    color: #b084f5;
+}
+
+.anime-list {
+    display: flex;
+    gap: 30px;
+    overflow-x: auto;
+    padding: 10px 0;
+}
+
+/* Anime card */
+.anime-item {
+    width: 200px;
+    height: 280px;
+    text-align: center;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.anime-item img {
+    width: 200px;
+    height: 200px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+/* Anime text */
+.anime-item p {
+    color: white;
+    margin-top: 5px;
+    margin-bottom: 0;
+
+    transition: color 0.3s ease;
+}
+
+/* Hover effects */
 a {
     color: #4dabf7;
     text-decoration: none;
 }
 
-a:hover {
+a:hover .anime-item p {
     color: #b084f5;
-    text-decoration: underline;
 }
 
 /* Responsive */

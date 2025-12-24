@@ -17,6 +17,28 @@
             <p>URL: <a href="{{person.url}}" target="_blank">{{person.url}}</a></p>
         </div>
     </div>
+    {{#if animeWorks}}
+        <h3>Anime works</h3>
+        <div class="anime-list">
+            {{#each animeWorks}}
+                <a href="/animes/{{id.animeMalId}}">
+                    <div class="anime-item">
+                        {{#if anime}}
+                            <img src="{{anime.image}}" alt="{{anime.title}}">
+                            <p><strong>{{anime.title}}</strong></p>
+                        {{else}}
+                            <div>
+                                <p>No image</p>
+                            </div>
+                        {{/if}}
+                        <p>Positison: {{id.position}}</p>
+
+                    </div>
+                </a>
+            {{/each}}
+        </div>
+    {{/if}}
+
 
 
 
