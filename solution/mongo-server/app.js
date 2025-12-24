@@ -5,6 +5,7 @@ const statsRouter = require("./routes/stats");
 const recommendationsRouter = require("./routes/recommendations");
 const profilesRouter = require("./routes/profiles");
 const favoritesRouter = require("./routes/favorites");
+const ratingsRouter = require("./routes/ratings");
 
 const app = express();
 //Middlewares execute before the requests
@@ -17,6 +18,7 @@ app.use("/stats", statsRouter);
 app.use("/recommendations", recommendationsRouter);
 app.use("/profiles", profilesRouter);
 app.use("/favorites", favoritesRouter);
+app.use("/ratings", ratingsRouter);
 
 app.get("/health", (req, res) => {
   res.json({ status: "OK", server: "mongo-server" });
