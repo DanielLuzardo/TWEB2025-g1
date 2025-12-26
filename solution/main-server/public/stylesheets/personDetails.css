@@ -108,3 +108,38 @@ a:hover .anime-item p {
         width: 100%;
     }
 }
+
+
+.voice-list {
+    display: flex;
+    gap: 30px;
+    overflow-x: auto;
+    padding: 10px 0;
+}
+
+/* Anime card */
+.voice-item {
+    width: 200px;
+    height: 420px;
+    text-align: center;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.voice-item img {
+    width: 200px;
+    height: 200px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+/* Anime text */
+.voice-item p {
+    color: white;
+    margin-top: 5px;
+    margin-bottom: 0;
+
+    transition: color 0.3s ease;
+}

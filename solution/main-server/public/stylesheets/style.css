@@ -125,3 +125,18 @@ button:hover {
     font-size: 0.9rem;
 }
 
+.navbar {
+    background-color: #2e2e50;
+    padding: 16px 24px;
+}
+
+.nav-home {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.nav-home:hover {
+    text-decoration: underline;
+}

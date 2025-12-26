@@ -1,14 +1,24 @@
 const express = require('express');
 const router = express.Router();
 const { getPerson, getPersonByName} = require('../controllers/personDetails');
+const {getPersonAnimeWorks, getPersonVoiceWorks} = require('../controllers/personDetails');
 
 router.get('/:id', async (req, res) => {
-    try {
-        const personData = await getPerson(req.params.id);
+        const personId = req.params.id;
+    try{
+        const [person, animeWorks, voiceWorks] = await Promise.all(
+            [
+
+                getPerson(personId),
+                getPersonAnimeWorks(personId),
+                getPersonVoiceWorks(personId)
+            ]
+        );
+
         res.render('personDetails', {
-            name: personData.personDetails.name,
-            person: personData.personDetails,
-            animeWorks: personData.animeWorks
+            person,
+            animeWorks,
+            voiceWorks
         });
     } catch (err) {
         console.error(err);
@@ -20,21 +30,22 @@ router.post('/', async (req, res) => {
     try{
         const personName = (req.body.personName);
 
-        const person = await getPersonByName(personName);
-        if (!person || person.length === 0) {
+        const personData = await getPersonByName(personName);
+        if (!personData || personData.length === 0) {
             return res.status(404).json({ message: 'Person not found' });
         }
 
-        console.log('id_person:', person?.[0].personMalId);
+        console.log('id_person:', personData?.[0].personMalId);
 
-        const personMalId = person[0].personMalId;
-        const personData = await getPerson(personMalId);
+        const personMalId = personData[0].personMalId;
 
-        res.render('personDetails', {
-            name: personData.personDetails.name,
-            person: personData.personDetails,
-            animeWorks: personData.animeWorks
-        });
+        const [person, animeWorks, voiceWorks] = await Promise.all([
+            getPerson(personMalId),
+            getPersonAnimeWorks(personMalId),
+            getPersonVoiceWorks(personMalId)
+        ]);
+
+        res.render('personDetails', { person, animeWorks, voiceWorks });
 
     }
     catch(err){

@@ -38,6 +38,30 @@
             {{/each}}
         </div>
     {{/if}}
+    {{#if voiceWorks}}
+        <h3>Voice works</h3>
+        <div class="voice-list">
+            {{#each voiceWorks}}
+                <a href="/voices/{{id.animeMalId}}">
+                    <div class="voice-item">
+                        {{#if voice}}
+                            <img src="{{voice.image}}" alt="{{voice.title}}">
+                            <p><strong>{{voice.title}}</strong></p>
+                        {{else}}
+                            <div>
+                                <p>No image</p>
+                            </div>
+                        {{/if}}
+                        <p>Role: {{role}}</p>
+                        <p>Language: {{language}}</p>
+                        <p>FALTA PONER EL CHARACTER</p>
+
+
+                    </div>
+                </a>
+            {{/each}}
+        </div>
+    {{/if}}
 
 
 
