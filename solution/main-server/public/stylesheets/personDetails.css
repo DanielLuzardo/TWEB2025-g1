@@ -87,7 +87,18 @@ a {
     text-decoration: none;
 }
 
-a:hover .anime-item p {
+a:hover .anime-item  p {
+    color: #b084f5;
+}
+
+.anime-link {
+    color: white;
+    text-decoration: none;
+    display: block;
+}
+
+
+.anime-link:hover p {
     color: #b084f5;
 }
 
@@ -143,3 +154,38 @@ a:hover .anime-item p {
 
     transition: color 0.3s ease;
 }
+
+.voice-item p,
+.character-link p {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+.character-link {
+    display: block;
+    width: 100%;
+    margin-top: 8px;
+    padding: 6px 12px;
+    background: rgba(176, 132, 245, 0.2);
+    color: #b084f5 !important;
+    text-decoration: none;
+    border-radius: 6px;
+    border: 1px solid #b084f5;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.character-link:hover {
+    background: rgba(176, 132, 245, 0.3);
+    transform: translateX(3px);
+}
+
+.character-link p {
+    margin: 0 !important;
+    color: #b084f5 !important;
+}
+

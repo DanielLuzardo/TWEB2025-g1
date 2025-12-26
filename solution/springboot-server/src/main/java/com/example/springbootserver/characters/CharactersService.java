@@ -3,6 +3,7 @@ package com.example.springbootserver.characters;
 
 import com.example.springbootserver.characterAnimeWorks.CharacterAnimeWorks;
 import com.example.springbootserver.characterNicknames.CharacterNicknames;
+import com.example.springbootserver.details.Details;
 import com.example.springbootserver.personVoiceWorks.PersonVoiceWorks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,7 +11,9 @@ import com.example.springbootserver.characterAnimeWorks.CharacterAnimeWorksRepos
 import com.example.springbootserver.characterNicknames.CharacterNicknamesRepository;
 import com.example.springbootserver.personVoiceWorks.PersonVoiceWorksRepository;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class CharactersService {
@@ -33,6 +36,15 @@ public class CharactersService {
 
     public List<Characters> getCharacterByName(String name) {
         return charactersRepository.findByName(name);
+    }
+
+    public Map<String, Object> getNameById(Integer id) {
+        Characters characters = charactersRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Details not found"));
+
+        Map<String, Object> result = new HashMap<>();
+        result.put("name", characters.getName());
+        return result;
     }
 
     public List<CharacterAnimeWorks> getCharacterAnimeWorksByCharacterId(Integer characterId) {

@@ -1,6 +1,7 @@
 package com.example.springbootserver.characters;
 
 import java.util.List;
+import java.util.Map;
 
 
 import com.example.springbootserver.characterAnimeWorks.CharacterAnimeWorks;
@@ -31,6 +32,10 @@ public class CharactersController {
         return charactersService.getCharacterByName(name);
     }
 
+    @GetMapping("/{id}/name")
+    public Map<String, Object> getNameById(@PathVariable Integer id){
+        return charactersService.getNameById(id);
+    }
 
     @GetMapping("/{id}/anime-works")
     public List<CharacterAnimeWorks> getAnimeWorks(@PathVariable Integer id) {

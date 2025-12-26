@@ -140,4 +140,19 @@ button:hover {
 
 .nav-home:hover {
     text-decoration: underline;
+    text-decoration-color: #b084f5;
+    color:#b084f5;
+}
+
+.btn-primary {
+    background-color: #b084f5;
+    border-color: #b084f5;
+    color: white;
+    transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+    background-color: #a36de0;
+    border-color: #a36de0;
+    color: white;
 }

@@ -45,15 +45,11 @@ async function getPersonAnimeWorks(personId){
 
             try {
                 const animeRes = await axios.get(
-                    `http://localhost:8082/details/${animeId}`
+                    `http://localhost:8082/details/${animeId}/summary`
                 );
                 return {
                     ...work,
-                    anime: {
-                        title: animeRes.data.title,
-                        image: animeRes.data.imageUrl
-
-                    }
+                    anime: animeRes.data
                 };
             } catch (error) {
                 console.error(`Error fetching anime ${animeId}:`, error.message);
@@ -72,19 +68,26 @@ async function getPersonVoiceWorks(personId){
     const voiceWorks = await Promise.all(
         (voiceWorksRes.data || []).map(async (work) => {
             const voiceId = work.id?.animeMalId;
-            if (!voiceId) return work;
+            const characterId = work.id?.characterMalId;
 
             try {
-                const voiceRes = await axios.get(
-                    `http://localhost:8082/details/${voiceId}`
-                );
+                if (voiceId) {
+                    const voiceRes = await axios.get(
+                        `http://localhost:8082/details/${voiceId}/summary`
+                    );
+                    voice = voiceRes.data;
+                }
+                if (characterId) {
+                    const characterRes = await axios.get(
+                        `http://localhost:8082/characters/${characterId}/name`
+                    );
+                    characterName = characterRes.data.name;
+                }
+
                 return {
                     ...work,
-                    voice: {
-                        title: voiceRes.data.title,
-                        image: voiceRes.data.imageUrl
-
-                    }
+                    voice,
+                    characterName
                 };
             } catch (error) {
                 console.error(`Error fetching voice work ${voiceId}:`, error.message);
