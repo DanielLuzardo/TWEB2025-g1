@@ -36,4 +36,9 @@ public class DetailsController {
     public Map<String, Object> getBasicDetailsById(@PathVariable Integer id){
         return detailsService.getBasicDetailsById(id);
     }
+
+    @GetMapping("/{id}/title")
+    public Map<String, Object> getTitleById(@PathVariable Integer id){
+        return detailsService.getTitleById(id);
+    }
 }

@@ -1,6 +1,24 @@
-function sendCharacterRequest() {
-    const animeName = document.getElementById('animeName').value.trim();
+function handleSearch() {
+    const type = document.getElementById('searchType').value;
+    const name = document.getElementById('searchInput').value.trim();
 
+    if (!name) return;
+
+    switch (type) {
+        case 'character':
+            sendCharacterRequest(name);
+            break;
+        case 'person':
+            sendPersonRequest(name);
+            break;
+        case 'anime':
+            sendDetailsRequest(name);
+            break;
+    }
+}
+
+
+function sendCharacterRequest(animeName) {
     axios.post('/characters', { animeName })
         .then(response => {
             document.body.innerHTML = response.data;
@@ -8,9 +26,7 @@ function sendCharacterRequest() {
         .catch(console.error);
 }
 
-function sendPersonRequest() {
-    const personName = document.getElementById('personName').value.trim();
-
+function sendPersonRequest(personName) {
     axios.post('/personDetails', { personName })
         .then(response => {
             document.body.innerHTML = response.data;
@@ -18,9 +34,7 @@ function sendPersonRequest() {
         .catch(console.error);
 }
 
-function sendDetailsRequest() {
-    const detailsName = document.getElementById('detailsName').value.trim();
-
+function sendDetailsRequest(detailsName) {
     axios.post('/details', { detailsName })
         .then(response => {
             document.body.innerHTML = response.data;

@@ -32,7 +32,7 @@ body {
 
 .anime-item {
     width: 200px;
-    height: 280px;
+    height: 325px;
     text-align: center;
     flex-shrink: 0;
     display: flex;

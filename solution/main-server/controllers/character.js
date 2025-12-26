@@ -44,19 +44,34 @@ async function getPersonVoiceWorks(characterId) {
     const voiceActors = await Promise.all(
         (voiceActorsRes.data || []).map(async (work) => {
             const personId = work.id?.personMalId;
-            if (!personId) return work;
+            const animeId = work.id?.animeMalId;
 
             try {
-                const personRes = await axios.get(
-                    `http://localhost:8082/personDetails/${personId}/summary`
-                );
+                if (personId) {
+                    const personRes = await axios.get(
+                        `http://localhost:8082/personDetails/${personId}/summary`
+                    );
+                    person = personRes.data;
+                }
+
+                if (animeId) {
+                    const animeRes = await axios.get(
+                        `http://localhost:8082/details/${animeId}/title`
+                    );
+                    animeTitle = animeRes.data.title;
+                }
 
                 return {
                     ...work,
-                    person: personRes.data
+                    person,
+                    animeTitle
                 };
+
             } catch (error) {
-                console.error(`Error fetching person ${personId}`, error.message);
+                console.error(
+                    `Error fetching data (person ${personId}, anime ${animeId})`,
+                    error.message
+                );
                 return work;
             }
         })

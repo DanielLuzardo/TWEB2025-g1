@@ -59,6 +59,7 @@ public class PersonDetailsService {
         Map<String, Object> basicInfo = new HashMap<>();
         basicInfo.put("name", details.getName());
         basicInfo.put("imageUrl", details.getImageUrl());
+        basicInfo.put("personMalId", details.getPersonMalId());
 
         return basicInfo;
     }

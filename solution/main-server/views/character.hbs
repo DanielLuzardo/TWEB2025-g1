@@ -29,7 +29,7 @@
         <h3>Anime works</h3>
         <div class="anime-list">
             {{#each animeWorks}}
-                <a href="/animes/{{id.animeMalId}}">
+                <a href="/details/{{id.animeMalId}}">
                     <div class="anime-item">
                         {{#if anime}}
                             <img src="{{anime.imageUrl}}" alt="{{anime.title}}">
@@ -53,14 +53,17 @@
         <h3>Voice Actors</h3>
         <div class="anime-list">
             {{#each voiceActors}}
+            <a href="/personDetails/{{person.personMalId}}">
                 <div class="anime-item">
                     {{#if person}}
                         <img src="{{person.imageUrl}}" alt="{{person.name}}">
+                        <p><strong>{{animeTitle}}</strong></p>
                         <p><strong>{{person.name}}</strong></p>
+                        <p>Role: {{role}}</p>
+                        <p>Language: {{language}}</p>
                     {{/if}}
-                    <p>Role: {{role}}</p>
-                    <p>Language: {{language}}</p>
                 </div>
+            </a>
             {{/each}}
         </div>
     {{/if}}

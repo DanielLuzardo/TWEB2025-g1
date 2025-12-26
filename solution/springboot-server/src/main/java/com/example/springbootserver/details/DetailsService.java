@@ -33,7 +33,14 @@ public class DetailsService {
         return basicInfo;
     }
 
+    public Map<String, Object> getTitleById(Integer id) {
+        Details details = detailsRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Details not found"));
 
+        Map<String, Object> result = new HashMap<>();
+        result.put("title", details.getTitle());
+        return result;
+    }
 
     public List<Details> getDetailsByTitle(String title){
         return detailsRepository.findByTitle(title);
