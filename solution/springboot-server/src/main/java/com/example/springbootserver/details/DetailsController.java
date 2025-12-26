@@ -25,12 +25,12 @@ public class DetailsController {
     public Details getDetailsById(@PathVariable Integer id){
         return detailsService.getDetailsById(id);
     }
-    /*
+
     @GetMapping
     public List<Details> getDetailsByTitle(@RequestParam String title){
         return detailsService.getDetailsByTitle(title);
     }
-    */
+
 
     @GetMapping("/{id}/summary")
     public Map<String, Object> getBasicDetailsById(@PathVariable Integer id){

@@ -1,7 +1,7 @@
 <div class="container mt-5">
     <h1>Character Aggregator</h1>
 
-    <form id="animeForm" onsubmit="sendAnimeRequest(); return false;">
+    <form id="characterForm" onsubmit="sendCharacterRequest(); return false;">
         <div class="mb-3">
             <label for="animeName" class="form-label">Character Name</label>
             <input name = "name" type="text" class="form-control" id="animeName" placeholder="Enter character name" required>
@@ -13,6 +13,14 @@
         <div class="mb-3">
             <label for="personName" class="person-label">Person Name</label>
             <input name = "name" type="text" class="form-control" id="personName" placeholder="Enter person name" required>
+        </div>
+        <button type="submit" >Search</button>
+    </form>
+
+    <form id="detailsForm" onsubmit="sendDetailsRequest(); return false;">
+        <div class="mb-3">
+            <label for="detailsName" class="details-label">Anime Name</label>
+            <input name = "name" type="text" class="form-control" id="detailsName" placeholder="Enter anime name" required>
         </div>
         <button type="submit" >Search</button>
     </form>

@@ -6,4 +6,9 @@ async function getDetails(detailsId){
     return res.data;
 }
 
-module.exports = {getDetails};
+async function getDetailsByName(detailsName) {
+    const r = await axios.get('http://localhost:8082/details', { params: { title: detailsName } });
+    return r.data;
+}
+
+module.exports = {getDetails, getDetailsByName};
