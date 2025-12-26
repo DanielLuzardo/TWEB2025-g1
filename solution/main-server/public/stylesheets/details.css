@@ -1,0 +1,22 @@
+/* Base */
+body {
+    background-color: #1a1a2e;
+    color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+}
+
+
+
+/* Header card */
+.details-header {
+    display: flex;
+    gap: 20px;
+    background-color: #2e2e50;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.details-anime {
+    display: flex;
+    gap: 40px;
+}

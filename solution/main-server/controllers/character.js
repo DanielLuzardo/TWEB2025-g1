@@ -1,6 +1,5 @@
 const axios = require('axios');
 
-const STALE_MS = 30 * 1000;
 
 async function getCharacter(characterId) {
     const res = await axios.get(

@@ -1,0 +1,33 @@
+<head>
+    <link rel="stylesheet" href="/stylesheets/details.css">
+
+</head>
+<body>
+<div class="container mt-4">
+
+    <div class="details-header">
+        <img src="{{details.imageUrl}}" alt="{{details.title}}">
+        <div class="details-info">
+            <h1>
+                {{details.title}}
+                {{#if details.titleJapanese}}
+                    ({{details.titleJapanese}})
+                {{/if}}
+            </h1>
+            <p class="details-anime">
+                <span>Anime Type: {{details.type}}</span>
+                <span>Episodes: {{details.episodes}}</span>
+                <span>Year: {{details.year}}</span>
+                <span>Popularity: {{details.popularity}}</span>
+                <span>Rating: {{details.rating}}</span>
+
+
+
+            </p>
+            <p>{{details.synopsis}}</p>
+            <p>URL: <a href="{{details.url}}" target="_blank">{{details.url}}</a></p>
+
+
+        </div>
+    </div>
+</div>
