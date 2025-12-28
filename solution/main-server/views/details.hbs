@@ -20,14 +20,56 @@
                 <span>Year: {{details.year}}</span>
                 <span>Popularity: {{details.popularity}}</span>
                 <span>Rating: {{details.rating}}</span>
-
-
-
             </p>
             <p>{{details.synopsis}}</p>
             <p>URL: <a href="{{details.url}}" target="_blank">{{details.url}}</a></p>
-
-
         </div>
     </div>
+
+    {{#if stats}}
+        <div class="stats-section">
+            <h2>User Statistics</h2>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-label">Watching</span>
+                    <span class="stat-value">{{stats.watching}}</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Completed</span>
+                    <span class="stat-value">{{stats.completed}}</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">On Hold</span>
+                    <span class="stat-value">{{stats.on_hold}}</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Dropped</span>
+                    <span class="stat-value">{{stats.dropped}}</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Plan to Watch</span>
+                    <span class="stat-value">{{stats.plan_to_watch}}</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Total</span>
+                    <span class="stat-value">{{stats.total}}</span>
+                </div>
+            </div>
+        </div>
+    {{/if}}
+
+    {{#if recommendations.length}}
+        <div class="recommendations-section">
+            <h2>Recommendations</h2>
+            <div class="recommendations-list">
+                {{#each recommendations}}
+                    <a href="/details/{{this.recommendation_mal_id}}" class="recommendation-item">
+                        Anime #{{this.recommendation_mal_id}}
+                    </a>
+                {{/each}}
+            </div>
+        </div>
+    {{/if}}
+
 </div>
+</body>
