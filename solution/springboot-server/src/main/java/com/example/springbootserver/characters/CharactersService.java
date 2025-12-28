@@ -56,6 +56,9 @@ public class CharactersService {
     public List<PersonVoiceWorks> getPersonVoiceWorksByCharacterId(Integer characterId) {
         return personVoiceWorksRepository.findByCharacter_CharacterMalId(characterId);
     }
+    public List<Characters> getCharactersForAnimeDetails(Integer detailsId) {
+        return charactersRepository.findAllByAnimeMalId(detailsId);
+    }
 
 
 }

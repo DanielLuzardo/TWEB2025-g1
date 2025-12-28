@@ -38,7 +38,7 @@ router.post('/', async (req, res) => {
 
         const characters = await getCharacterByName(animeName);
         if (!characters || characters.length === 0) {
-            return res.status(404).json({ message: 'Character not found' });
+            return res.render('index', {error: 'Character not found'});
         }
         console.log('characters returned:', characters);
         console.log('first:', characters?.[0].characterMalId);

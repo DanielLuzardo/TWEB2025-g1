@@ -33,4 +33,31 @@ async function getAnimeRecommendations(malId) {
     }
 }
 
-module.exports = { getDetails, getDetailsByName, getAnimeStats, getAnimeRecommendations };
+async function getCharactersByAnime(detailsId){
+    const charactersAnimeRes = await axios.get(`http://localhost:8082/details/${detailsId}/characters`);
+    console.log(charactersAnimeRes.data[0]);
+
+    const characterAnime = await Promise.all(
+        (charactersAnimeRes.data || []).map(async (character) => {
+            const characterId = character.id?.characterMalId;
+            if (!characterId) return character;
+
+            try {
+                const characterRes = await axios.get(
+                    `http://localhost:8082/characters/${characterId}`
+                );
+                return {
+                    ...character,
+                    characterDetails: characterRes.data
+                };
+            } catch (error) {
+                console.error(`Error fetching anime ${characterId}:`, error.message);
+                return character;
+            }
+        })
+    );
+    return characterAnime;
+
+}
+
+module.exports = { getDetails, getDetailsByName, getAnimeStats, getAnimeRecommendations, getCharactersByAnime };

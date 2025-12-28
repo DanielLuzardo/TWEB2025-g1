@@ -70,6 +70,18 @@
             </div>
         </div>
     {{/if}}
-
+    {{#if charactersAnime}}
+        <h3>Characters</h3>
+        <div class="characters-list">
+            {{#each charactersAnime}}
+                <a href="/characters/{{characterMalId}}" class="character-link">
+                    <div class="character-item">
+                        <img src="{{image}}" alt="{{name}}">
+                        <p><strong>{{name}}</strong></p>
+                    </div>
+                </a>
+            {{/each}}
+        </div>
+    {{/if}}
 </div>
 </body>

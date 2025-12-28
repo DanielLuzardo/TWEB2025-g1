@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 
+import com.example.springbootserver.characters.Characters;
+import com.example.springbootserver.characters.CharactersService;
 import com.example.springbootserver.details.DetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,11 +16,14 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/details")
 public class DetailsController {
     private final DetailsService detailsService;
+    private final CharactersService charactersService;
 
     @Autowired
-    public DetailsController(DetailsService detailsService){
+    public DetailsController(DetailsService detailsService, CharactersService charactersService) {
 
         this.detailsService = detailsService;
+        this.charactersService = charactersService;
+
     }
 
     @GetMapping("/{id}")
@@ -40,5 +45,9 @@ public class DetailsController {
     @GetMapping("/{id}/title")
     public Map<String, Object> getTitleById(@PathVariable Integer id){
         return detailsService.getTitleById(id);
+    }
+    @GetMapping("/{id}/characters")
+    public List<Characters> getCharactersByAnime(@PathVariable Integer id) {
+        return charactersService.getCharactersForAnimeDetails(id);
     }
 }

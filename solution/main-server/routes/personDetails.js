@@ -32,7 +32,7 @@ router.post('/', async (req, res) => {
 
         const personData = await getPersonByName(personName);
         if (!personData || personData.length === 0) {
-            return res.status(404).json({ message: 'Person not found' });
+            return res.render('index', {error: 'Person not found'});
         }
 
         console.log('id_person:', personData?.[0].personMalId);
