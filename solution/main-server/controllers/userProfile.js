@@ -17,8 +17,7 @@ async function getFavorites(username) {
     try {
         const res = await axios.get(`${MONGO_SERVER}/favorites/${username}`);
         const favorites = res.data;
-
-        // Add the name to the favorites in order to show to the user the name and not the id
+        //We fetch in the Java Server for each favorites details, (image, name etc) in order to not only show the id
         const enrichedFavorites = await Promise.all(
             favorites.map(async (fav) => {
                 try {
@@ -32,7 +31,7 @@ async function getFavorites(username) {
                     } else if (fav.fav_type === 'character') {
                         const details = await axios.get(`${JAVA_SERVER}/characters/${fav.id}/name`);
                         name = details.data.name;
-                        imageUrl = details.data.imageUrl;
+                        imageUrl = details.data.imageUrl || null;
                     } else if (fav.fav_type === 'people') {
                         const details = await axios.get(`${JAVA_SERVER}/personDetails/${fav.id}/summary`);
                         name = details.data.name;
@@ -59,7 +58,6 @@ async function getRatings(username) {
         const res = await axios.get(`${MONGO_SERVER}/ratings/user/${username}`);
         const ratings = res.data;
 
-        // Add the name of the anime in order to show the name and not the id
         const enrichedRatings = await Promise.all(
             ratings.map(async (rating) => {
                 try {

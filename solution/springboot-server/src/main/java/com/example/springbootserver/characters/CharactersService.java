@@ -37,13 +37,15 @@ public class CharactersService {
     public List<Characters> getCharacterByName(String name) {
         return charactersRepository.findByName(name);
     }
-
+    //Modified to return also the image
     public Map<String, Object> getNameById(Integer id) {
-        Characters characters = charactersRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Details not found"));
-
+        Characters character = charactersRepository.findById(id).orElse(null);
+        if (character == null) {
+            return null;
+        }
         Map<String, Object> result = new HashMap<>();
-        result.put("name", characters.getName());
+        result.put("name", character.getName());
+        result.put("imageUrl", character.getImage());
         return result;
     }
 
