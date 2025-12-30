@@ -47,7 +47,7 @@ public class DetailsController {
         return detailsService.getTitleById(id);
     }
     @GetMapping("/{id}/characters")
-    public List<Characters> getCharactersByAnime(@PathVariable Integer id) {
+    public List<Map<String, Object>> getCharactersByAnime(@PathVariable Integer id) {
         return charactersService.getCharactersForAnimeDetails(id);
     }
 }

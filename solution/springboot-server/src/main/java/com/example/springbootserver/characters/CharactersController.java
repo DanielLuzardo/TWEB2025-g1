@@ -32,10 +32,12 @@ public class CharactersController {
         return charactersService.getCharacterByName(name);
     }
 
+    /*
     @GetMapping("/{id}/name")
     public Map<String, Object> getNameById(@PathVariable Integer id){
         return charactersService.getNameById(id);
     }
+    */
 
     @GetMapping("/{id}/anime-works")
     public List<CharacterAnimeWorks> getAnimeWorks(@PathVariable Integer id) {
@@ -51,6 +53,14 @@ public class CharactersController {
     public List<CharacterNicknames> getNicknames(@PathVariable Integer id) {
         return charactersService.getCharacterNicknameByCharacterId(id);
     }
+    @GetMapping("/{id}/summary")
+    public Map<String, Object> getBasicDetailsById(@PathVariable Integer id){
+        return charactersService.getBasicDetailsById(id);
+    }
 
+    @GetMapping("/by-name/{name}")
+    public List<Map<String, Object>> getBasicDetailsByName(@PathVariable String name) {
+        return charactersService.getBasicDetailsByName(name);
+    }
 
 }

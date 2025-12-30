@@ -5,7 +5,8 @@ const {getCharacterByName} = require('../controllers/character');
 const {
     getCharacter,
     getCharacterAnimeWorks,
-    getPersonVoiceWorks
+    getPersonVoiceWorks,
+    getCharacterCard
 } = require('../controllers/character');
 
 

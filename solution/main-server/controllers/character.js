@@ -83,8 +83,10 @@ async function getPersonVoiceWorks(characterId) {
 
 
 async function getCharacterByName(characterName) {
-    const r = await axios.get('http://localhost:8082/characters', { params: { name: characterName } });
+    const r = await axios.get(`http://localhost:8082/characters/by-name/${(characterName)}`
+    );
     return r.data;
 }
+
 
 module.exports = { getCharacter, getCharacterAnimeWorks, getPersonVoiceWorks, getCharacterByName};

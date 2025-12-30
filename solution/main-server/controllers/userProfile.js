@@ -29,7 +29,7 @@ async function getFavorites(username) {
                         name = details.data.title;
                         imageUrl = details.data.imageUrl;
                     } else if (fav.fav_type === 'character') {
-                        const details = await axios.get(`${JAVA_SERVER}/characters/${fav.id}/name`);
+                        const details = await axios.get(`${JAVA_SERVER}/characters/${fav.id}/summary`);
                         name = details.data.name;
                         imageUrl = details.data.imageUrl || null;
                     } else if (fav.fav_type === 'people') {
