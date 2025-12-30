@@ -1,0 +1,169 @@
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.profile-header h1 {
+    margin: 0;
+    color: #a78bfa;
+    font-size: 2.5rem;
+}
+
+.profile-badge {
+    background: #a78bfa;
+    color: #1a1a2e;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.profile-info {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+}
+
+.profile-info p {
+    margin: 8px 0;
+    color: #ccc;
+}
+
+.profile-info strong {
+    color: #a78bfa;
+}
+
+.profile-stats, .favorites-section, .ratings-section {
+    margin-top: 25px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+}
+
+.profile-stats h2, .favorites-section h2, .ratings-section h2 {
+    color: #a78bfa;
+    margin-bottom: 20px;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 15px;
+}
+
+.stat-item {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.stat-label {
+    display: block;
+    font-size: 12px;
+    color: #aaa;
+    margin-bottom: 5px;
+}
+
+.stat-value {
+    display: block;
+    font-size: 24px;
+    font-weight: 600;
+    color: #fff;
+}
+
+.favorites-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
+}
+
+.favorite-item {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.fav-type {
+    display: block;
+    font-size: 11px;
+    color: #a78bfa;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.fav-link {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.fav-link:hover {
+    color: #a78bfa;
+}
+
+.ratings-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+.ratings-table th, .ratings-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.ratings-table th {
+    background: rgba(167, 139, 250, 0.3);
+    color: #fff;
+    font-weight: 600;
+}
+
+.ratings-table td {
+    color: #ccc;
+}
+
+.ratings-table a {
+    color: #a78bfa;
+    text-decoration: none;
+}
+
+.ratings-table a:hover {
+    text-decoration: underline;
+}
+
+.status-badge {
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+}
+.fav-image {
+    width: 60px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-bottom: 8px;
+}
+
+.favorite-item {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.status-watching { background: #3b82f6; color: #fff; }
+.status-completed { background: #22c55e; color: #fff; }
+.status-on_hold { background: #f59e0b; color: #fff; }
+.status-dropped { background: #ef4444; color: #fff; }
+.status-plan_to_watch { background: #8b5cf6; color: #fff; }

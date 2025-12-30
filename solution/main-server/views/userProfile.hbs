@@ -1,0 +1,121 @@
+<head>
+    <link rel="stylesheet" href="/stylesheets/userProfile.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-4">
+
+    <div class="profile-header">
+        <h1>{{profile.username}}</h1>
+        {{#if profile.gender}}
+            <span class="profile-badge">{{profile.gender}}</span>
+        {{/if}}
+    </div>
+
+    <div class="profile-info">
+        {{#if profile.birthday}}
+            <p><strong>Birthday:</strong> {{profile.birthday}}</p>
+        {{/if}}
+        {{#if profile.location}}
+            <p><strong>Location:</strong> {{profile.location}}</p>
+        {{/if}}
+        {{#if profile.joined}}
+            <p><strong>Joined:</strong> {{profile.joined}}</p>
+        {{/if}}
+    </div>
+
+    <div class="profile-stats">
+        <h2>Anime Stats</h2>
+        <div class="stats-grid">
+            <div class="stat-item">
+                <span class="stat-label">Days Watched</span>
+                <span class="stat-value">{{profile.days_watched}}</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">Mean Score</span>
+                <span class="stat-value">{{profile.mean_score}}</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">Watching</span>
+                <span class="stat-value">{{profile.watching}}</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">Completed</span>
+                <span class="stat-value">{{profile.completed}}</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">On Hold</span>
+                <span class="stat-value">{{profile.on_hold}}</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">Dropped</span>
+                <span class="stat-value">{{profile.dropped}}</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">Plan to Watch</span>
+                <span class="stat-value">{{profile.plan_to_watch}}</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">Total Entries</span>
+                <span class="stat-value">{{profile.total_entries}}</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">Episodes Watched</span>
+                <span class="stat-value">{{profile.episodes_watched}}</span>
+            </div>
+        </div>
+    </div>
+
+    {{#if favorites.length}}
+        <div class="favorites-section">
+            <h2>Favorites ({{favorites.length}})</h2>
+            <div class="favorites-grid">
+                {{#each favorites}}
+                    <div class="favorite-item">
+                        <span class="fav-type">{{this.fav_type}}</span>
+                        {{#if this.imageUrl}}
+                            <img src="{{this.imageUrl}}" alt="{{this.name}}" class="fav-image">
+                        {{/if}}
+                        {{#if (eq this.fav_type "anime")}}
+                            <a href="/details/{{this.id}}" class="fav-link">{{this.name}}</a>
+                        {{else if (eq this.fav_type "character")}}
+                            <a href="/characters/{{this.id}}" class="fav-link">{{this.name}}</a>
+                        {{else if (eq this.fav_type "people")}}
+                            <a href="/personDetails/{{this.id}}" class="fav-link">{{this.name}}</a>
+                        {{else}}
+                            <span class="fav-link">{{this.name}}</span>
+                        {{/if}}
+                    </div>
+                {{/each}}
+            </div>
+        </div>
+    {{/if}}
+
+    {{#if ratings.length}}
+        <div class="ratings-section">
+            <h2>Ratings ({{ratings.length}})</h2>
+            <table class="ratings-table">
+                <thead>
+                <tr>
+                    <th>Anime</th>
+                    <th>Status</th>
+                    <th>Score</th>
+                    <th>Episodes</th>
+                </tr>
+                </thead>
+                <tbody>
+                {{#each ratings}}
+                    <tr>
+                        <td><a href="/details/{{this.anime_id}}">{{this.animeName}}</a></td>
+                        <td><span class="status-badge status-{{this.status}}">{{this.status}}</span></td>
+                        <td>{{this.score}}</td>
+                        <td>{{this.num_watched_episodes}}</td>
+                    </tr>
+                {{/each}}
+                </tbody>
+            </table>
+        </div>
+    {{/if}}
+
+</div>
+</body>s

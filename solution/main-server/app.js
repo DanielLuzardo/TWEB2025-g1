@@ -3,41 +3,44 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
-
+//Routes
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 var characterRouter = require("./routes/character");
 var personDetailsRouter = require("./routes/personDetails");
 var detailsRouter = require("./routes/details");
-
+var userProfileRouter = require('./routes/userProfile');
 var app = express();
 
 const { engine } = require("express-handlebars");
 
 // view engine setup
-app.set("views", path.join(__dirname, "views"));
-app.engine(
-  "hbs",
-  engine({
-    extname: ".hbs",
-    defaultLayout: "layout",
-    layoutsDir: path.join(__dirname, "views"),
-    partialsDir: path.join(__dirname, "views/partials"),
-  })
-);
-app.set("view engine", "hbs");
+app.set('views', path.join(__dirname, 'views'));
+app.engine('hbs', engine({
+    extname: '.hbs',
+    defaultLayout: 'layout',
+    layoutsDir: path.join(__dirname, 'views'),
+    partialsDir: path.join(__dirname, 'views/partials'),
+    helpers: {
+        eq: function(a, b) {
+            return a === b;
+        }
+    }
+}));
+app.set('view engine', 'hbs');
 
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
-
+// routes
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/characters", characterRouter);
 app.use("/personDetails", personDetailsRouter);
 app.use("/details", detailsRouter);
+app.use('/user', userProfileRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
