@@ -14,6 +14,9 @@ function handleSearch() {
         case 'anime':
             sendDetailsRequest(name);
             break;
+        case 'user':
+            sendUserRequest(name);
+            break;
     }
 }
 
@@ -36,6 +39,14 @@ function sendPersonRequest(personName) {
 
 function sendDetailsRequest(detailsName) {
     axios.post('/details', { detailsName })
+        .then(response => {
+            document.body.innerHTML = response.data;
+        })
+        .catch(console.error);
+}
+
+function sendUserRequest(username) {
+    axios.post('/user', { username })
         .then(response => {
             document.body.innerHTML = response.data;
         })
