@@ -13,4 +13,5 @@ const profileSchema = new mongoose.Schema({
   plan_to_watch: { type: Number },
 });
 
+profileSchema.index({ username: 1 });
 module.exports = mongoose.model("Profile", profileSchema);

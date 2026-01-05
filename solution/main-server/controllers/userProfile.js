@@ -15,17 +15,12 @@ async function getProfile(username) {
 
 async function getFavorites(username, limit = 20, offset = 0) {
     try {
-        console.time('getFavorites-total');
-
-        console.time('mongo-favorites');
         const res = await axios.get(`${MONGO_SERVER}/favorites/${username}`);
-        console.timeEnd('mongo-favorites');
 
         const allFavorites = res.data;
         const totalFavorites = allFavorites.length;
         const favorites = allFavorites.slice(offset, offset + limit);
 
-        console.time('enrich-favorites');
         const enrichedFavorites = await Promise.all(
             favorites.map(async (fav) => {
                 try {
@@ -53,9 +48,6 @@ async function getFavorites(username, limit = 20, offset = 0) {
                 }
             })
         );
-        console.timeEnd('enrich-favorites');
-
-        console.timeEnd('getFavorites-total');
 
         return {
             favorites: enrichedFavorites,

@@ -8,5 +8,8 @@ const ratingSchema = new mongoose.Schema({
   is_rewatching: { type: Number },
   num_watched_episodes: { type: Number },
 });
+// index for speed searching by username and anime
+ratingSchema.index({ username: 1 });
+ratingSchema.index({ anime_id: 1 });
 
 module.exports = mongoose.model("Rating", ratingSchema);
