@@ -45,10 +45,13 @@ function sendDetailsRequest(detailsName) {
         .catch(console.error);
 }
 
+/*
+ * User search uses direct navigation instead of Axios POST.
+ * Unlike anime, character, and person searches that return a list of results
+ * to display on the same page, user search looks for an exact username match
+ * and navigates directly to that user's profile page.
+ * This is a design decision: there's no intermediate results list for users.
+ */
 function sendUserRequest(username) {
-    axios.post('/user', { username })
-        .then(response => {
-            document.body.innerHTML = response.data;
-        })
-        .catch(console.error);
+    window.location.href = `/user/${username}`;
 }

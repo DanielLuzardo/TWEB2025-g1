@@ -13,11 +13,19 @@ async function getProfile(username) {
     }
 }
 
-async function getFavorites(username) {
+async function getFavorites(username, limit = 20, offset = 0) {
     try {
+        console.time('getFavorites-total');
+
+        console.time('mongo-favorites');
         const res = await axios.get(`${MONGO_SERVER}/favorites/${username}`);
-        const favorites = res.data;
-        //We fetch in the Java Server for each favorites details, (image, name etc) in order to not only show the id
+        console.timeEnd('mongo-favorites');
+
+        const allFavorites = res.data;
+        const totalFavorites = allFavorites.length;
+        const favorites = allFavorites.slice(offset, offset + limit);
+
+        console.time('enrich-favorites');
         const enrichedFavorites = await Promise.all(
             favorites.map(async (fav) => {
                 try {
@@ -45,18 +53,30 @@ async function getFavorites(username) {
                 }
             })
         );
+        console.timeEnd('enrich-favorites');
 
-        return enrichedFavorites;
+        console.timeEnd('getFavorites-total');
+
+        return {
+            favorites: enrichedFavorites,
+            total: totalFavorites,
+            hasMore: offset + limit < totalFavorites
+        };
     } catch (error) {
         console.error(`Error fetching favorites for ${username}:`, error.message);
-        return [];
+        return { favorites: [], total: 0, hasMore: false };
     }
 }
 
-async function getRatings(username) {
+async function getRatings(username, limit = 20, offset = 0) {
     try {
         const res = await axios.get(`${MONGO_SERVER}/ratings/user/${username}`);
-        const ratings = res.data;
+        let ratings = res.data;
+
+        const totalRatings = ratings.length;
+
+        //Pagination for improving loading times
+        ratings = ratings.slice(offset, offset + limit);
 
         const enrichedRatings = await Promise.all(
             ratings.map(async (rating) => {
@@ -74,10 +94,14 @@ async function getRatings(username) {
             })
         );
 
-        return enrichedRatings;
+        return {
+            ratings: enrichedRatings,
+            total: totalRatings,
+            hasMore: offset + limit < totalRatings
+        };
     } catch (error) {
         console.error(`Error fetching ratings for ${username}:`, error.message);
-        return [];
+        return { ratings: [], total: 0, hasMore: false };
     }
 }
 
