@@ -11,9 +11,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @RequestMapping("/details")
+@Tag(name = "Anime Details", description = "Endpoints for retrieving anime information")
 public class DetailsController {
     private final DetailsService detailsService;
     private final CharactersService charactersService;
@@ -27,6 +33,11 @@ public class DetailsController {
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "Get anime by ID", description = "Retrieves complete anime details by its MyAnimeList ID")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Anime found successfully"),
+            @ApiResponse(responseCode = "404", description = "Anime not found")
+    })
     public Details getDetailsById(@PathVariable Integer id){
         return detailsService.getDetailsById(id);
     }
