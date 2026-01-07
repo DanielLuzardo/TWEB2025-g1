@@ -1,10 +1,10 @@
 <head>
     <link rel="stylesheet" href="/stylesheets/details.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
 </head>
 <body>
 <div class="container mt-4">
-
     <div class="details-header">
         <img src="{{details.imageUrl}}" alt="{{details.title}}">
         <div class="details-info">
@@ -21,6 +21,35 @@
                 <span>Popularity: {{details.popularity}}</span>
                 <span>Rating: {{details.rating}}</span>
             </p>
+            <div class="stats-section-bottom">
+                <div class="stats-cards">
+                    <div class="stat-card">
+                        <span class="stat-title">SCORE</span>
+                        <span class="stat-main">{{details.score}}</span>
+                        <span class="stat-sub">{{details.scoredBy}} users</span>
+                    </div>
+                    {{#if details.rank}}
+                        <div class="stat-card">
+                            <span class="stat-title">RANKED</span>
+                            <span class="stat-main">#{{details.rank}}</span>
+                        </div>
+                    {{/if}}
+                    {{#if details.popularity}}
+                        <div class="stat-card">
+                            <span class="stat-title">POPULARITY</span>
+                            <span class="stat-main">#{{details.popularity}}</span>
+                        </div>
+                    {{/if}}
+                    {{#if details.members}}
+                        <div class="stat-card members-card">
+                            <span class="stat-title">MEMBERS</span>
+                            <span class="stat-main">{{details.members}}</span>
+                        </div>
+                    {{/if}}
+
+                </div>
+            </div>
+            <h3>Synopsis</h3>
             <p>{{details.synopsis}}</p>
             <p>URL: <a href="{{details.url}}" target="_blank">{{details.url}}</a></p>
         </div>
@@ -57,31 +86,64 @@
             </div>
         </div>
     {{/if}}
+    <div class="details-header">
+        <button  class = "btn-chars" id="btn-chars" type="button">Characters</button>
+        <button class = "btn-recs" id="btn-recs" type="button">Recommendations</button>
 
+    </div>
     {{#if recommendations.length}}
-        <div class="recommendations-section">
-            <h2>Recommendations</h2>
-            <div class="recommendations-list">
-                {{#each recommendations}}
-                    <a href="/details/{{this.recommendation_mal_id}}" class="recommendation-item">
-                        Anime #{{this.recommendation_mal_id}}
+        <div id="recs"  style="display:none;">
+            <section class="recommendations-section">
+                <h2 class="section-title">Recommendations</h2>
+                <div class="recommendations-list-vertical">
+                    {{#each recommendations}}
+                        <a href="/details/{{this.recommendation_mal_id}}" class="rec-row">
+                            <div class="rec-thumb">
+                                <img src="{{this.anime.imageUrl}}" alt="{{this.anime.title}}">
+                            </div>
+                            <div class="rec-info">
+                                <div class="rec-title">
+                                    {{#if this.anime.title}}
+                                        {{this.anime.title}}
+                                    {{/if}}
+                                </div>
+
+                            </div>
+                        </a>
+                    {{/each}}
+                </div>
+            </section>
+        </div>
+    {{/if}}
+
+    {{#if charactersAnime}}
+        <div id="chars">
+            <section class="recommendations-section">
+            <h2 class="section-title" >Characters</h2>
+            <div class="characters-list-2col">
+                {{#each charactersAnime}}
+                    <a href="/characters/{{id}}" class="character-row">
+                        <div class="character-thumb">
+                            {{#if imageUrl}}
+                                <img src="{{imageUrl}}" alt="{{name}}">
+                            {{/if}}
+                        </div>
+                        <div class="character-info">
+                            <div class="character-name">
+                                {{name}}
+                            </div>
+                        </div>
                     </a>
                 {{/each}}
             </div>
+            </section>
         </div>
     {{/if}}
-    {{#if charactersAnime}}
-        <h3>Characters</h3>
-        <div class="characters-list">
-            {{#each charactersAnime}}
-            <a href="/characters/{{characterMalId}}" class="character-link">
-                    <div class="character-item">
-                        <img src="{{imageUrl}}" alt="{{name}}">
-                        <p><strong>{{name}}</strong></p>
-                    </div>
-                </a>
-            {{/each}}
-        </div>
-    {{/if}}
+
 </div>
+
+<script src="/javascripts/details.js" defer></script>
+
 </body>
+
+
