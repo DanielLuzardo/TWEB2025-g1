@@ -9,7 +9,7 @@ async function getDetails(detailsId) {
 }
 
 async function getDetailsByName(detailsName) {
-    const r = await axios.get(`${JAVA_SERVER}/details`, { params: { title: detailsName } });
+    const r = await axios.get(`${JAVA_SERVER}/details/title/${detailsName}`);
     return r.data;
 }
 
@@ -24,13 +24,31 @@ async function getAnimeStats(malId) {
 }
 
 async function getAnimeRecommendations(malId) {
-    try {
-        const res = await axios.get(`${MONGO_SERVER}/recommendations/${malId}`);
-        return res.data;
-    } catch (error) {
-        console.error(`Error fetching recommendations for anime ${malId}:`, error.message);
-        return [];
-    }
+    const res = await axios.get(`${MONGO_SERVER}/recommendations/${malId}`);
+    const animes = await Promise.all(
+        (res.data || []).map(async (anime) => {
+            const animeId = anime.recommendation_mal_id;
+            if (!animeId) {
+                return anime;
+            }
+
+            try {
+                const animeRes = await axios.get(
+                    `http://localhost:8082/details/${animeId}/summary`
+                );
+
+                return {
+                    ...anime,
+                    anime: animeRes.data
+                };
+            } catch (error) {
+                console.error(`Error fetching anime ${animeId}`, error.message);
+                return anime;
+            }
+        })
+    );
+
+    return animes;
 }
 
 async function getCharactersByAnime(detailsId){

@@ -44,7 +44,8 @@ public class DetailsController {
         return detailsService.getDetailsById(id);
     }
 
-    @GetMapping
+
+    @GetMapping("/title/{title}")
     @Operation(summary = "Search anime by title", description = "Searches for anime by title and returns the details ingo")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Details Search completed successfully"),
@@ -52,7 +53,7 @@ public class DetailsController {
     })
     public List<Details> getDetailsByTitle(
             @Parameter(description = "Anime title to search", example = "Naruto")
-            @RequestParam String title){
+            @PathVariable String title){
         return detailsService.getDetailsByTitle(title);
     }
 

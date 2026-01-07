@@ -38,7 +38,8 @@ public class PersonDetailsController {
         return personDetailsService.getPersonDetailsById(id);
     }
 
-    @GetMapping
+
+    @GetMapping("/name/{name}")
     @Operation(summary = "Search person by name", description = "Searches for voice actors/staff by name")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Search completed successfully"),
@@ -46,7 +47,7 @@ public class PersonDetailsController {
     })
     public List<PersonDetails> getPersonDetailsByName(
             @Parameter(description = "Person name to search for", example = "Miyazaki")
-            @RequestParam String name){
+            @PathVariable String name){
         return personDetailsService.getPersonDetailsByName(name);
     }
 

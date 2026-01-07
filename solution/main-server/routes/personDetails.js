@@ -25,8 +25,7 @@ router.get('/:id', async (req, res) => {
         res.status(500).render('error', { message: 'Server error' });
     }
 });
-router.post('/', async (req, res) => {
-
+router.post('/name', async (req, res) => {
     try{
         const personName = (req.body.personName);
 

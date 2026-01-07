@@ -5,10 +5,10 @@ async function getAll() {
 }
 
 async function getByMalId(mal_id) {
-  return Recommendation.findOne({ mal_id: mal_id }).lean();
+    return Recommendation.find({ mal_id: Number(mal_id) }).lean();
 }
 async function create(recommendationData) {
   const recommendation = new Recommendation(recommendationData);
   return recommendation.save();
 }
-module.exports = { getAll, getByMalId, create };
+module.exports = { getAll, getByMalId, create};

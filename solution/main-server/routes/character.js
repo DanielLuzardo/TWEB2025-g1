@@ -32,7 +32,7 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-router.post('/', async (req, res) => {
+router.post('/name', async (req, res) => {
 
     try{
         const animeName = (req.body.animeName);

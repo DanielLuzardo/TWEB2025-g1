@@ -14,9 +14,6 @@ router.get("/", async (req, res) => {
 router.get("/:mal_id", async (req, res) => {
   try {
     const recommendation = await controller.getByMalId(req.params.mal_id);
-    if (!recommendation) {
-      return res.status(404).json({ error: "Recommendation not found" });
-    }
     res.json(recommendation);
   } catch (error) {
     res.status(500).json({ error: "Internal Server Error" });

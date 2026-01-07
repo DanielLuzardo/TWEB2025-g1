@@ -1,49 +1,3 @@
-function handleSearch() {
-    const type = document.getElementById('searchType').value;
-    const name = document.getElementById('searchInput').value.trim();
-
-    if (!name) return;
-
-    switch (type) {
-        case 'character':
-            sendCharacterRequest(name);
-            break;
-        case 'person':
-            sendPersonRequest(name);
-            break;
-        case 'anime':
-            sendDetailsRequest(name);
-            break;
-        case 'user':
-            sendUserRequest(name);
-            break;
-    }
-}
-
-
-function sendCharacterRequest(animeName) {
-    axios.post('/characters', { animeName })
-        .then(response => {
-            document.body.innerHTML = response.data;
-        })
-        .catch(console.error);
-}
-
-function sendPersonRequest(personName) {
-    axios.post('/personDetails', { personName })
-        .then(response => {
-            document.body.innerHTML = response.data;
-        })
-        .catch(console.error);
-}
-
-function sendDetailsRequest(detailsName) {
-    axios.post('/details', { detailsName })
-        .then(response => {
-            document.body.innerHTML = response.data;
-        })
-        .catch(console.error);
-}
 
 /*
  * User search uses direct navigation instead of Axios POST.
@@ -52,6 +6,37 @@ function sendDetailsRequest(detailsName) {
  * and navigates directly to that user's profile page.
  * This is a design decision: there's no intermediate results list for users.
  */
-function sendUserRequest(username) {
-    window.location.href = `/user/${username}`;
+function sendUserRequest() {
+    const input = document.getElementById("searchInput");
+    const username = input.value.trim();
+
+    if (!username) return;
+
+    window.location.href = `/user/${(username)}`;
 }
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    const selector = document.getElementById("searchType");
+
+    const formAnime = document.getElementById("form-anime");
+    const formCharacter = document.getElementById("form-character");
+    const formPerson = document.getElementById("form-person");
+    const formUser = document.getElementById("form-user");
+
+    function updateForms() {
+        formAnime.style.display = "none";
+        formCharacter.style.display = "none";
+        formPerson.style.display = "none";
+        formUser.style.display = "none";
+
+        if (selector.value === "anime") formAnime.style.display = "block";
+        if (selector.value === "character") formCharacter.style.display = "block";
+        if (selector.value === "person") formPerson.style.display = "block";
+        if (selector.value === "user") formUser.style.display = "block";
+    }
+
+    selector.addEventListener("change", updateForms);
+    updateForms();
+});

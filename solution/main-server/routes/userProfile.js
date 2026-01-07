@@ -13,7 +13,7 @@ router.get('/:username', async (req, res) => {
         ]);
 
         if (!profile) {
-            return res.status(404).render('error', { message: 'User not found' });
+            return res.render('index', {error: 'Username not found'});
         }
 
         res.render('userProfile', {

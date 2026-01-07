@@ -41,7 +41,7 @@ public class CharactersController {
     }
 
 
-    @GetMapping
+    @GetMapping("/name/{name}")
     @Operation(summary = "Search characters by name", description = "Searches for character by name and returns its information ")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Search completed successfully"),
@@ -49,7 +49,7 @@ public class CharactersController {
     })
     public List<Characters> getCharacterByName(
             @Parameter(description = "Character name to search for", example = "Goku")
-            @RequestParam String name){
+            @PathVariable String name){
         return charactersService.getCharacterByName(name);
     }
 

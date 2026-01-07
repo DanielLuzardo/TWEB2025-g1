@@ -3,34 +3,64 @@
 </head>
 <body>
 <div class="container mt-5">
-    <form id="searchForm" onsubmit="handleSearch(); return false;">
-        <div class="mb-3">
-            <label for="searchType" class="form-label">Search type</label>
-            <select id="searchType" class="form-select">
-                <option value="character">Character</option>
-                <option value="person">Person</option>
-                <option value="anime">Anime</option>
-                <option value="user">User</option>
-            </select>
-        </div>
 
+<div class="mb-3">
+
+    <label for="searchType" class="form-label">Search type</label>
+    <select id="searchType" class="form-select">
+        <option value="anime" selected>Anime</option>
+        <option value="character">Character</option>
+        <option value="person">Person</option>
+        <option value="user">User</option>
+    </select>
+</div>
+
+    <form id="form-anime" action="/details/title" method="POST">
         <div class="mb-3">
             <label for="searchInput" class="form-label">Name</label>
-            <input
-                    type="text"
-                    class="form-control"
-                    id="searchInput"
-                    placeholder="Enter name"
-                    required
-            >
-        </div>
 
-        <button type="submit" class="btn btn-primary">Search</button>
+            <input type="text" name="detailsName" id="detailsName" placeholder="Enter Anime name" class="form-control">
+        </div>
+        <button type="submit"  class="btn btn-primary">Search Character</button>
+
     </form>
+
+    <form id="form-character" action="/characters/name" method="POST" style="display:none">
+        <div class="mb-3">
+            <label for="searchInput" class="form-label">Name</label>
+
+            <input type="text" name="animeName" id="animeName" placeholder="Enter Character name" class="form-control">
+        </div>
+        <button type="submit"  class="btn btn-primary">Search Character</button>
+
+    </form>
+
+    <form id="form-person" action="/personDetails/name" method="POST" style="display:none">
+        <div class="mb-3">
+            <label for="searchInput" class="form-label">Name</label>
+
+            <input type="text" name="personName" id="personName" placeholder="Enter Person name" class="form-control">
+        </div>
+        <button type="submit"  class="btn btn-primary">Search Person</button>
+
+    </form>
+
+    <form id="form-user" onsubmit="sendUserRequest(); return false;" style="display:none">
+        <div class="mb-3">
+            <label for="searchInput" class="form-label">Name</label>
+            <input type="text" class="form-control" id="searchInput" placeholder="Enter User name" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Search User</button>
+    </form>
+
     {{#if error}}
         <div class="alert alert-danger text-center">
             {{error}}
         </div>
     {{/if}}
 </div>
+</div>
+</body>
+    <script src="/javascripts/index.js" defer></script>
+
 </body>

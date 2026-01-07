@@ -101,7 +101,7 @@ async function getPersonVoiceWorks(personId){
 }
 
 async function getPersonByName(personName) {
-    const r = await axios.get('http://localhost:8082/personDetails', { params: { name: personName } });
+    const r = await axios.get(`http://localhost:8082/personDetails/name/${personName}`);
     return r.data;
 }
 
