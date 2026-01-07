@@ -7,13 +7,18 @@ import com.example.springbootserver.personAnimeWorks.PersonAnimeWorks;
 import com.example.springbootserver.personVoiceWorks.PersonVoiceWorks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 import java.util.List;
 import java.util.Map;
 
 @RestController
 @RequestMapping("/personDetails")
-
+@Tag(name = "Person Details", description = "Endpoints for searching voice actors and staff information")
 public class PersonDetailsController {
     private final PersonDetailsService personDetailsService;
 
@@ -21,29 +26,73 @@ public class PersonDetailsController {
     public PersonDetailsController(PersonDetailsService personDetailsService){
         this.personDetailsService = personDetailsService;
     }
-
     @GetMapping("/{id}")
-    public PersonDetails getPersonDetails(@PathVariable Integer id){
+    @Operation(summary = "Get person by ID", description = "Return complete person details (voice actor/staff) by their BDD ID")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Person found successfully"),
+            @ApiResponse(responseCode = "404", description = "Person not found")
+    })
+    public PersonDetails getPersonDetails(
+            @Parameter(description = "BDD person ID", example = "1")
+            @PathVariable Integer id){
         return personDetailsService.getPersonDetailsById(id);
     }
+
     @GetMapping
-    public List<PersonDetails> getPersonDetailsByName(@RequestParam String name){
+    @Operation(summary = "Search person by name", description = "Searches for voice actors/staff by name")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Search completed successfully"),
+            @ApiResponse(responseCode = "404", description = "No person found with that name")
+    })
+    public List<PersonDetails> getPersonDetailsByName(
+            @Parameter(description = "Person name to search for", example = "Miyazaki")
+            @RequestParam String name){
         return personDetailsService.getPersonDetailsByName(name);
     }
+
     @GetMapping("/{id}/alternate-name")
-    public List<PersonAlternateName> getAlternateName(@PathVariable Integer id) {
+    @Operation(summary = "Get person's alternate names", description = "Returns all alternate names for a specific person")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Alternate names returned successfully"),
+            @ApiResponse(responseCode = "404", description = "Person not found")
+    })
+    public List<PersonAlternateName> getAlternateName(
+            @Parameter(description = "BDD person ID", example = "123")
+            @PathVariable Integer id) {
         return personDetailsService.getPersonAlternateNameByPersonId(id);
     }
+
     @GetMapping("/{id}/anime-works")
-    public List<PersonAnimeWorks> getAnimeWorks(@PathVariable Integer id) {
+    @Operation(summary = "Get person's anime works", description = "Returned all anime where this person has worked")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Anime works returned successfully"),
+            @ApiResponse(responseCode = "404", description = "Person not found")
+    })
+    public List<PersonAnimeWorks> getAnimeWorks(
+            @Parameter(description = "BDD person ID", example = "1")
+            @PathVariable Integer id) {
         return personDetailsService.getPersonAnimeWorksByPersonId(id);
     }
     @GetMapping("/{id}/voice-works")
-    public List<PersonVoiceWorks> getVoiceWorks(@PathVariable Integer id) {
+    @Operation(summary = "Get person's voice acting roles", description = "Returns all characters this person has voiced")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Voice works returned successfully"),
+            @ApiResponse(responseCode = "404", description = "Person not found")
+    })
+    public List<PersonVoiceWorks> getVoiceWorks(
+            @Parameter(description = "BDD person ID", example = "1")
+            @PathVariable Integer id) {
         return personDetailsService.getPersonVoiceWorksByPersonId(id);
     }
     @GetMapping("/{id}/summary")
-    public Map<String, Object> getBasicDetailsById(@PathVariable Integer id){
+    @Operation(summary = "Get person summary", description = "Retrieves basic person information (name and image URL)")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Summary returned successfully"),
+            @ApiResponse(responseCode = "404", description = "Person not found")
+    })
+    public Map<String, Object> getBasicDetailsById(
+            @Parameter(description = "BDD person ID", example = "1")
+            @PathVariable Integer id){
         return personDetailsService.getBasicDetailsById(id);
     }
 }

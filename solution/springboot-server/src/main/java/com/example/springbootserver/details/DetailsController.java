@@ -38,27 +38,59 @@ public class DetailsController {
             @ApiResponse(responseCode = "200", description = "Anime found successfully"),
             @ApiResponse(responseCode = "404", description = "Anime not found")
     })
-    public Details getDetailsById(@PathVariable Integer id){
+    public Details getDetailsById(
+            @Parameter(description = "Anime ID in details table", example = "333")
+            @PathVariable Integer id){
         return detailsService.getDetailsById(id);
     }
 
     @GetMapping
-    public List<Details> getDetailsByTitle(@RequestParam String title){
+    @Operation(summary = "Search anime by title", description = "Searches for anime by title and returns the details ingo")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Details Search completed successfully"),
+            @ApiResponse(responseCode = "404", description = "No anime found with that title")
+    })
+    public List<Details> getDetailsByTitle(
+            @Parameter(description = "Anime title to search", example = "Naruto")
+            @RequestParam String title){
         return detailsService.getDetailsByTitle(title);
     }
 
 
     @GetMapping("/{id}/summary")
-    public Map<String, Object> getBasicDetailsById(@PathVariable Integer id){
+    @Operation(summary = "Get anime summary", description = "Returns basic anime information (title, image URL and id)")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Details found successfully"),
+            @ApiResponse(responseCode = "404", description = "Anime not found")
+    })
+    public Map<String, Object> getBasicDetailsById(
+            @Parameter(description = "Anime ID in details table", example = "444")
+            @PathVariable Integer id){
         return detailsService.getBasicDetailsById(id);
     }
 
+    @Operation(summary = "Get anime title", description = "Returns only the title of an anime by its ID")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Title found successfully"),
+            @ApiResponse(responseCode = "404", description = "Anime not found")
+    })
     @GetMapping("/{id}/title")
-    public Map<String, Object> getTitleById(@PathVariable Integer id){
+    public Map<String, Object> getTitleById(
+            @Parameter(description = "Anime ID in details table", example = "555")
+            @PathVariable Integer id){
         return detailsService.getTitleById(id);
     }
+
+
     @GetMapping("/{id}/characters")
-    public List<Map<String, Object>> getCharactersByAnime(@PathVariable Integer id) {
+    @Operation(summary = "Get anime characters", description = "Returns all characters that appear in a specific anime")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Characters found successfully"),
+            @ApiResponse(responseCode = "404", description = "Anime not found")
+    })
+    public List<Map<String, Object>> getCharactersByAnime(
+            @Parameter(description = "Anime ID in details table", example = "555")
+            @PathVariable Integer id) {
         return charactersService.getCharactersForAnimeDetails(id);
     }
 }
