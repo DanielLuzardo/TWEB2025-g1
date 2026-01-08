@@ -3,27 +3,38 @@ body {
     color: #ffffff;
     font-family: 'Poppins', sans-serif;
 }
+.main-content {
+    background-image: url('../images/main_background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
+    position: relative;
+}
 
 .header {
     text-align: center;
     padding: 40px 20px 20px;
+    position: relative;
+    z-index: 2;
 }
 
 .header h1 {
     font-size: 3.5rem;
     font-weight: 700;
     background: linear-gradient(135deg, #b084f5 0%, #4dabf7 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
     background-clip: text;
     margin-bottom: 10px;
-    text-shadow: 0 0 40px rgba(176, 132, 245, 0.3);
+    filter: drop-shadow(0 0 20px rgba(176, 132, 245, 0.6));
+    text-shadow: 6px 3px 9px rgba(0, 0, 0, 0.8);
 }
 
 .header p {
-    font-size: 1.1rem;
-    color: rgba(255, 255, 255, 0.7);
-    font-weight: 300;
+    font-size: 1.2rem;
+    color: #ffffff;
+    font-weight: 400;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
 }
 
 .container-index {
