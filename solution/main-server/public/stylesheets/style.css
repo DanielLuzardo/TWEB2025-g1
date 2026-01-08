@@ -4,6 +4,44 @@ body {
     font-family: 'Poppins', sans-serif;
 }
 
+.header {
+    text-align: center;
+    padding: 40px 20px 20px;
+}
+
+.header h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #b084f5 0%, #4dabf7 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 10px;
+    text-shadow: 0 0 40px rgba(176, 132, 245, 0.3);
+}
+
+.header p {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 300;
+}
+
+.container-index {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0 30px;
+}
+
+.search-card {
+    background: rgba(46, 46, 80, 0.8);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+
 html, body {
     overflow-x: hidden;
 }
@@ -14,34 +52,53 @@ h1 {
     margin-bottom: 30px;
 }
 
-form {
-    background-color: #2e2e50;
-    padding: 25px;
-    border-radius: 10px;
+.form-label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 0.85rem;
+}
+
+.form-select,
+.form-control {
+    width: 100%;
+    padding: 14px 18px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    color: #ffffff;
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.3s ease;
     margin-bottom: 20px;
 }
-
-.form-label {
+s
+.form-control:active {
     color: #ffffff;
-    font-weight: 500;
 }
 
-.form-control {
-    background-color: #1a1a2e;
-    border: 1px solid #4dabf7;
+.form-select:focus,
+.form-control:focus {
+    outline: none;
+    border-color: #b084f5;
+    color: #ffffff;
+    background: rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0 0 3px rgba(176, 132, 245, 0.2);
+}
+
+.form-select option {
+    background: #2e2e50;
     color: #ffffff;
 }
 
 .form-control::placeholder {
-    color: #aaa;
+    color: rgba(255, 255, 255, 0.4);
 }
 
-.form-control:focus {
-    background-color: #1a1a2e;
-    color: #ffffff;
-    border-color: #b084f5;
-    box-shadow: 0 0 0 0.2rem rgba(176, 132, 245, 0.25);
-}
 
 button {
     background-color: #4dabf7;

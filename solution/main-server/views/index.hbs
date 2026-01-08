@@ -2,18 +2,22 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-<div class="container mt-5">
-
-<div class="mb-3">
-
-    <label for="searchType" class="form-label">Search type</label>
-    <select id="searchType" class="form-select">
-        <option value="anime" selected>Anime</option>
-        <option value="character">Character</option>
-        <option value="person">Person</option>
-        <option value="user">User</option>
-    </select>
+<div class="header">
+    <h1>Anime Search</h1>
+    <p>Discover your favorite anime, characters, and people</p>
 </div>
+
+<div class="container-index">
+    <div class="search-card">
+        <div class="mb-3">
+            <label for="searchType" class="form-label">Search type</label>
+            <select id="searchType" class="form-select">
+                <option value="anime" selected>Anime</option>
+                <option value="character">Character</option>
+                <option value="person">Person</option>
+                <option value="user">User</option>
+            </select>
+        </div>
 
     <form id="form-anime" action="/details/title" method="POST">
         <div class="mb-3">
@@ -21,7 +25,7 @@
 
             <input type="text" name="detailsName" id="detailsName" placeholder="Enter Anime name" class="form-control">
         </div>
-        <button type="submit"  class="btn btn-primary">Search Character</button>
+        <button type="submit"  class="btn btn-primary">Search Anime</button>
 
     </form>
 
@@ -58,6 +62,8 @@
             {{error}}
         </div>
     {{/if}}
+</div>
+</div>
 </div>
 </div>
 </body>
