@@ -114,4 +114,16 @@ public class CharactersController {
         return charactersService.getBasicDetailsByName(name);
     }
 
+    @GetMapping("/{id}/name")
+    @Operation(summary = "Get character name", description = "Returns only the name of a character by its ID")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Character name returned successfully"),
+            @ApiResponse(responseCode = "404", description = "Character not found")
+    })
+    public Map<String, Object> getCharacterName(
+            @Parameter(description = "Character ID", example = "1")
+            @PathVariable Integer id) {
+        return charactersService.getNameById(id);
+    }
+
 }

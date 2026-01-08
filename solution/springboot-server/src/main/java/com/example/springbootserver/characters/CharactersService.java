@@ -39,8 +39,7 @@ public class CharactersService {
         return charactersRepository.findByName(name);
     }
 
-    //Modified to return also the image
-    /*
+
     public Map<String, Object> getNameById(Integer id) {
         Characters character = charactersRepository.findById(id).orElse(null);
         if (character == null) {
@@ -48,12 +47,9 @@ public class CharactersService {
         }
         Map<String, Object> result = new HashMap<>();
         result.put("name", character.getName());
-        result.put("imageUrl", character.getImage());
-        result.put("nameKanji",  character.getNameKanji());
         return result;
     }
 
-    */
 
     public List<CharacterAnimeWorks> getCharacterAnimeWorksByCharacterId(Integer characterId) {
         return characterAnimeWorksRepository.findByCharacter_CharacterMalId(characterId);

@@ -15,6 +15,8 @@ router.get('/:id', async (req, res) => {
             ]
         );
 
+
+
         res.render('personDetails', {
             person,
             animeWorks,

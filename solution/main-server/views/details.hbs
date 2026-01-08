@@ -15,11 +15,11 @@
                 {{/if}}
             </h1>
             <p class="details-anime">
-                <span>Anime Type: {{details.type}}</span>
-                <span>Episodes: {{details.episodes}}</span>
-                <span>Year: {{details.year}}</span>
-                <span>Popularity: {{details.popularity}}</span>
-                <span>Rating: {{details.rating}}</span>
+                {{#if details.type}}<span>Anime Type: {{details.type}}</span>{{/if}}
+                {{#if details.episodes}}<span>Episodes: {{details.episodes}}</span>{{/if}}
+                {{#if details.year}}<span>Year: {{details.year}}</span>{{/if}}
+                {{#if details.popularity}}<span>Popularity: {{details.popularity}}</span>{{/if}}
+                {{#if details.rating}}<span>Rating: {{details.rating}}</span>{{/if}}
             </p>
             <div class="stats-section-bottom">
                 <div class="stats-cards">
@@ -51,7 +51,11 @@
             </div>
             <h3>Synopsis</h3>
             <p>{{details.synopsis}}</p>
-            <p>URL: <a href="{{details.url}}" target="_blank">{{details.url}}</a></p>
+            <p>
+                <strong>
+                    <a href="{{details.url}}" target="_blank">View on MyAnimeList</a>
+                </strong>
+            </p>
         </div>
     </div>
 
@@ -86,10 +90,19 @@
             </div>
         </div>
     {{/if}}
-    <div class="details-header">
-        <button  class = "btn-chars" id="btn-chars" type="button">Characters</button>
-        <button class = "btn-recs" id="btn-recs" type="button">Recommendations</button>
-
+    <div class="tabs-container">
+        <button class="tab-btn {{#if charactersAnime}}active{{else}}disabled{{/if}}"
+                id="btn-chars"
+                type="button"
+                {{#unless charactersAnime}}disabled{{/unless}}>
+            Characters
+        </button>
+        <button class="tab-btn {{#if charactersAnime}}{{else}}active{{/if}} {{#unless recommendations.length}}disabled{{/unless}}"
+                id="btn-recs"
+                type="button"
+                {{#unless recommendations.length}}disabled{{/unless}}>
+            Recommendations
+        </button>
     </div>
     {{#if recommendations.length}}
         <div id="recs"  style="display:none;">
@@ -124,9 +137,7 @@
                 {{#each charactersAnime}}
                     <a href="/characters/{{id}}" class="character-row">
                         <div class="character-thumb">
-                            {{#if imageUrl}}
-                                <img src="{{imageUrl}}" alt="{{name}}">
-                            {{/if}}
+                            <img src="{{imageUrl}}" alt="{{name}}" onerror="this.src='/images/default-character.png'">
                         </div>
                         <div class="character-info">
                             <div class="character-name">

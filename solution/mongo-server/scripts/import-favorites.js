@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const Favorite = require("../models/favorites");
 
 const mongoURI = "mongodb://localhost:27017/anime_db";
-const BATCH_SIZE = 10000; // Içnsert in batches to avoid memory issues
+const BATCH_SIZE = 10000; // Insert in batches to avoid memory issues
 
 async function importData() {
   try {

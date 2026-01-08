@@ -1,18 +1,24 @@
 
-const btnRecs = document.getElementById("btn-recs");
-const btnChars = document.getElementById("btn-chars");
-const recs = document.getElementById("recs");
-const chars = document.getElementById("chars");
+const btnChars = document.getElementById('btn-chars');
+const btnRecs = document.getElementById('btn-recs');
+const charsSection = document.getElementById('chars');
+const recsSection = document.getElementById('recs');
 
 
-if (btnRecs && btnChars && recs && chars) {
-    btnRecs.addEventListener("click", () => {
-        recs.style.display = "block";
-        chars.style.display = "none";
+if (btnChars && btnRecs && charsSection && recsSection) {
+    btnChars.addEventListener('click', () => {
+        charsSection.style.display = 'block';
+        recsSection.style.display = 'none';
+
+        btnChars.classList.add('active');
+        btnRecs.classList.remove('active');
     });
 
-    btnChars.addEventListener("click", () => {
-        chars.style.display = "block";
-        recs.style.display = "none";
+    btnRecs.addEventListener('click', () => {
+        recsSection.style.display = 'block';
+        charsSection.style.display = 'none';
+
+        btnRecs.classList.add('active');
+        btnChars.classList.remove('active');
     });
 }

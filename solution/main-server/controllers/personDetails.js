@@ -70,32 +70,38 @@ async function getPersonVoiceWorks(personId){
             const voiceId = work.id?.animeMalId;
             const characterId = work.id?.characterMalId;
 
-            try {
-                if (voiceId) {
+            let voice = null;
+            let characterName = null;
+
+            if (voiceId) {
+                try {
                     const voiceRes = await axios.get(
                         `http://localhost:8082/details/${voiceId}/summary`
                     );
                     voice = voiceRes.data;
+                } catch (error) {
+                    console.error(`Error fetching voice ${voiceId}:`, error.message);
                 }
-                if (characterId) {
+            }
+
+            if (characterId) {
+                try {
                     const characterRes = await axios.get(
                         `http://localhost:8082/characters/${characterId}/name`
                     );
                     characterName = characterRes.data.name;
+                } catch (error) {
+                    console.error(`Error fetching character ${characterId}:`, error.message);
                 }
-
-                return {
-                    ...work,
-                    voice,
-                    characterName
-                };
-            } catch (error) {
-                console.error(`Error fetching voice work ${voiceId}:`, error.message);
-                return work;
             }
+
+            return {
+                ...work,
+                voice,
+                characterName
+            };
         })
     );
-    console.log("voiceWorks[0] =", voiceWorksRes.data?.[0]);
 
     return voiceWorks;
 }
