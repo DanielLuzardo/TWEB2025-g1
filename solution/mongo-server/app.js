@@ -6,6 +6,7 @@ const recommendationsRouter = require("./routes/recommendations");
 const profilesRouter = require("./routes/profiles");
 const favoritesRouter = require("./routes/favorites");
 const ratingsRouter = require("./routes/ratings");
+var path = require('path');
 
 const app = express();
 //Middlewares execute before the requests
@@ -25,3 +26,19 @@ app.get("/health", (req, res) => {
 });
 
 module.exports = app;
+
+// server.js (excerpt)
+const swaggerJSDoc = require('swagger-jsdoc');
+const swaggerUi = require('swagger-ui-express');
+const swaggerOptions = {
+    definition: {
+        openapi: '3.0.0',
+        info: { title: 'Mongo Server', version: '1.0.0' },
+        servers: [{ url: 'http://localhost:3000' }],
+    },
+    apis: [path.join(__dirname, 'routes/*.js')],
+};
+const swaggerSpec = swaggerJSDoc(swaggerOptions);
+console.log("--- DEBUG SWAGGER ---");
+console.log("Rutas encontradas:", swaggerSpec.paths);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));

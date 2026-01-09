@@ -2,14 +2,7 @@ const controller = require("../controllers/favorites");
 const express = require("express");
 const router = express.Router();
 
-router.get("/", async (req, res) => {
-  try {
-    const favorites = await controller.getAll();
-    res.json(favorites);
-  } catch (error) {
-    res.status(500).json({ error: "Internal Server Error" });
-  }
-});
+
 
 router.get("/:username", async (req, res) => {
   try {
