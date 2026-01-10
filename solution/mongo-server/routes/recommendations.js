@@ -94,6 +94,7 @@ router.get("/:mal_id", async (req, res) => {
  *     responses:
  *       201:
  *         description: Recommendation created successfully
+ *         content:
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/Recommendation'

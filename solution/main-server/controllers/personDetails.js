@@ -1,5 +1,14 @@
 const axios = require("axios");
 
+
+/**
+ * Get full person details by  person ID.
+ * Also reformats the birthday field for display purposes.
+ *
+ * @param {number|string} personId - person ID.
+ * @returns {Promise<Object>} Person details object.
+ * @throws {Error} If personId is missing or the person is not found.
+ */
 async function getPerson(personId){
     try{
         if (!personId) {
@@ -21,10 +30,7 @@ async function getPerson(personId){
         } else {
             person.birthdayFormatted = null;
         }
-
-
         return person;
-
     }
     catch (error) {
         console.error('Error in getPerson:', error.message);
@@ -32,7 +38,13 @@ async function getPerson(personId){
     }
 
 }
-
+/**
+ * Get anime works associated with a person.
+ * Each work is enriched with a short anime summary.
+ *
+ * @param {number|string} personId - Person ID.
+ * @returns {Promise<Array<Object>>} List of anime works.
+ */
 async function getPersonAnimeWorks(personId){
     const animeWorksRes = await axios.get(
         `http://localhost:8082/personDetails/${personId}/anime-works`
@@ -59,6 +71,14 @@ async function getPersonAnimeWorks(personId){
     );
     return animeWorks;
 }
+
+/**
+ * Get voice acting works associated with a person.
+ * Each entry is enriched with anime summary and character name.
+ *
+ * @param {number|string} personId - Person ID.
+ * @returns {Promise<Array<Object>>} List of voice works.
+ */
 
 async function getPersonVoiceWorks(personId){
     const voiceWorksRes = await axios.get(
@@ -105,7 +125,12 @@ async function getPersonVoiceWorks(personId){
 
     return voiceWorks;
 }
-
+/**
+ * Get person details by name.
+ *
+ * @param {string} personName - Person name.
+ * @returns {Promise<Array<Object>>} List of matching persons.
+ */
 async function getPersonByName(personName) {
     const r = await axios.get(`http://localhost:8082/personDetails/name/${personName}`);
     return r.data;

@@ -42,6 +42,25 @@ app.use("/personDetails", personDetailsRouter);
 app.use("/details", detailsRouter);
 app.use('/user', userProfileRouter);
 
+
+
+// server.js (excerpt)
+const swaggerJSDoc = require('swagger-jsdoc');
+const swaggerUi = require('swagger-ui-express');
+const swaggerOptions = {
+    definition: {
+        openapi: '3.0.0',
+        info: { title: 'Mongo Server', version: '1.0.0' },
+        servers: [{ url: 'http://localhost:3001' }],
+    },
+    apis: [path.join(__dirname, 'routes/*.js')],
+};
+const swaggerSpec = swaggerJSDoc(swaggerOptions);
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
+
+
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
@@ -59,3 +78,4 @@ app.use(function (err, req, res, next) {
 });
 
 module.exports = app;
+

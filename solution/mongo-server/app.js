@@ -39,6 +39,5 @@ const swaggerOptions = {
     apis: [path.join(__dirname, 'routes/*.js')],
 };
 const swaggerSpec = swaggerJSDoc(swaggerOptions);
-console.log("--- DEBUG SWAGGER ---");
-console.log("Rutas encontradas:", swaggerSpec.paths);
+
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
