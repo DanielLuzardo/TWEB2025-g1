@@ -146,45 +146,4 @@ router.get("/anime/:anime_id", async (req, res) => {
   }
 });
 
-/**
- * @swagger
- * /ratings:
- *   post:
- *     summary: Create a new rating
- *     description: Adds or updates a rating entry.
- *     tags: [Ratings]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             $ref: '#/components/schemas/RatingCreate'
- *           examples:
- *             example:
- *               value:
- *                 username: "ishikawas"
- *                 anime_id: 59062
- *                 status: "watching"
- *                 score: 0
- *                 is_rewatching: 0
- *                 num_watched_episodes: 4
- *     responses:
- *       201:
- *         description: Rating created successfully
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Rating'
- *       500:
- *         description: Internal Server Error
- */
-router.post("/", async (req, res) => {
-  try {
-    const newRating = await controller.create(req.body);
-    res.status(201).json(newRating);
-  } catch (error) {
-    res.status(500).json({ error: "Internal Server Error" });
-  }
-});
-
 module.exports = router;

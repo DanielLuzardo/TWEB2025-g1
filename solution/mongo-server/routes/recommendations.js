@@ -73,45 +73,4 @@ router.get("/:mal_id", async (req, res) => {
   }
 });
 
-/**
- * @swagger
- * /recommendations:
- *   post:
- *     summary: Create a new recommendation
- *     description: Adds a new recommendation entry to the database.
- *     tags: [Recommendations]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             $ref: '#/components/schemas/Recommendation'
- *           examples:
- *             example:
- *               value:
- *                 mal_id: 1234
- *                 recommendation_mal_id: 5678
- *     responses:
- *       201:
- *         description: Recommendation created successfully
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Recommendation'
- *       500:
- *         description: Internal Server Error
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Error'
- */
-router.post("/", async (req, res) => {
-  try {
-    const newRecommendation = await controller.create(req.body);
-    res.status(201).json(newRecommendation);
-  } catch (error) {
-    res.status(500).json({ error: "Internal Server Error" });
-  }
-});
-
 module.exports = router;

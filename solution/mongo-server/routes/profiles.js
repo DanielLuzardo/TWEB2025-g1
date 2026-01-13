@@ -96,53 +96,5 @@ router.get("/:username", async (req, res) => {
   }
 });
 
-/**
- * @swagger
- * /profiles:
- *   post:
- *     summary: Create a new profile
- *     description: Creates a new user profile entry.
- *     tags: [Profiles]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             $ref: '#/components/schemas/Profile'
- *           examples:
- *             example:
- *               value:
- *                 username: "Daniel"
- *                 gender: "Male"
- *                 birthday: "1999-07-10"
- *                 location: "Canary Islands"
- *                 joined: "Feb 15, 2008",
- *                 watching: 85,
- *                 completed: 430,
- *                 on_hold: 1,
- *                 dropped: 3,
- *                 plan_to_watch: 69
- *     responses:
- *       201:
- *         description: Profile created successfully
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Profile'
- *       500:
- *         description: Internal Server Error
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Error'
- */
-router.post("/", async (req, res) => {
-  try {
-    const newProfile = await controller.create(req.body);
-    res.status(201).json(newProfile);
-  } catch (error) {
-    res.status(500).json({ error: "Internal Server Error" });
-  }
-});
 
 module.exports = router;

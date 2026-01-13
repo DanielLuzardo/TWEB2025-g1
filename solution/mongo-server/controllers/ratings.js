@@ -19,14 +19,4 @@ async function getByAnimeId(anime_id) {
   return Rating.find({ anime_id: anime_id }).lean();
 }
 
-/**
- * Create a new rating entry.
- * @param {Object} ratingData - Rating data to store.
- * @returns {Promise<Object>} The saved rating document.
- */
-async function create(ratingData) {
-  const rating = new Rating(ratingData);
-  return rating.save();
-}
-
-module.exports = {getByUsername, getByAnimeId, create };
+module.exports = {getByUsername, getByAnimeId};
