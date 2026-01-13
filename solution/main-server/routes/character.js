@@ -9,7 +9,55 @@ const {
     getCharacterCard
 } = require('../controllers/character');
 
+/**
+ * @swagger
+ * tags:
+ *   - name: Character
+ *     description: HTML pages for character details
+ */
 
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     CharacterNameRequest:
+ *       type: object
+ *       required: [animeName]
+ *       properties:
+ *         animeName:
+ *           type: string
+ *           description: Character name to search
+ *           example: "Naruto Uzumaki"
+ */
+
+/**
+ * @swagger
+ * /character/{id}:
+ *   get:
+ *     summary: Render character details page by ID
+ *     description: Renders the HTML page with character details, anime works and voice actors using the character ID.
+ *     tags: [Character]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: Character ID
+ *     responses:
+ *       200:
+ *         description: HTML page rendered successfully
+ *         content:
+ *           text/html:
+ *             schema:
+ *               type: string
+ *       500:
+ *         description: Server error while rendering
+ *         content:
+ *           text/html:
+ *             schema:
+ *               type: string
+ */
 router.get('/:id', async (req, res) => {
     const characterId = req.params.id;
 
@@ -32,6 +80,36 @@ router.get('/:id', async (req, res) => {
     }
 });
 
+/**
+ * @swagger
+ * /character/name:
+ *   post:
+ *     summary: Search characters by name
+ *     description: Searches characters by name and renders a list of matching results.
+ *     tags: [Character]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/x-www-form-urlencoded:
+ *           schema:
+ *             $ref: '#/components/schemas/CharacterNameRequest'
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/CharacterNameRequest'
+ *     responses:
+ *       200:
+ *         description: HTML page rendered successfully (or index page if character not found)
+ *         content:
+ *           text/html:
+ *             schema:
+ *               type: string
+ *       500:
+ *         description: Server error while rendering
+ *         content:
+ *           text/html:
+ *             schema:
+ *               type: string
+ */
 router.post('/name', async (req, res) => {
 
     try{
