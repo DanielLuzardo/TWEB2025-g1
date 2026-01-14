@@ -38,10 +38,15 @@ public class DetailsController {
             @ApiResponse(responseCode = "200", description = "Anime found successfully"),
             @ApiResponse(responseCode = "404", description = "Anime not found")
     })
-    public Details getDetailsById(
+    public ResponseEntity<Details> getDetailsById(
             @Parameter(description = "Anime ID in details table", example = "333")
             @PathVariable Integer id){
-        return detailsService.getDetailsById(id);
+        Details details = detailsService.getDetailsById(id);
+
+        if (details == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        return ResponseEntity.ok(details);
     }
 
 
@@ -51,10 +56,15 @@ public class DetailsController {
             @ApiResponse(responseCode = "200", description = "Details Search completed successfully"),
             @ApiResponse(responseCode = "404", description = "No anime found with that title")
     })
-    public List<Details> getDetailsByTitle(
+    public ResponseEntity<List<Details>> getDetailsByTitle(
             @Parameter(description = "Anime title to search", example = "Naruto")
             @PathVariable String title){
-        return detailsService.getDetailsByTitle(title);
+        List<Details> detailsList = detailsService.getDetailsByTitle(title);
+
+        if (detailsList == null || detailsList.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        return ResponseEntity.ok(detailsList);
     }
 
 
@@ -64,10 +74,16 @@ public class DetailsController {
             @ApiResponse(responseCode = "200", description = "Details found successfully"),
             @ApiResponse(responseCode = "404", description = "Anime not found")
     })
-    public Map<String, Object> getBasicDetailsById(
+    public ResponseEntity<Map<String, Object>> getBasicDetailsById(
             @Parameter(description = "Anime ID in details table", example = "444")
             @PathVariable Integer id){
-        return detailsService.getBasicDetailsById(id);
+        Map<String, Object> summary = detailsService.getBasicDetailsById(id);
+
+        if (summary == null || summary.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+
+        return ResponseEntity.ok(summary);
     }
 
     @Operation(summary = "Get anime title", description = "Returns only the title of an anime by its ID")
@@ -76,10 +92,15 @@ public class DetailsController {
             @ApiResponse(responseCode = "404", description = "Anime not found")
     })
     @GetMapping("/{id}/title")
-    public Map<String, Object> getTitleById(
+    public ResponseEntity<Map<String, Object>> getTitleById(
             @Parameter(description = "Anime ID in details table", example = "555")
             @PathVariable Integer id){
-        return detailsService.getTitleById(id);
+        Map<String, Object> title = detailsService.getTitleById(id);
+
+        if (title == null || title.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        return ResponseEntity.ok(title);
     }
 
 

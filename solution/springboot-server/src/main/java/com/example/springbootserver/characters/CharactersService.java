@@ -97,8 +97,9 @@ public class CharactersService {
     public List<Map<String, Object>> getBasicDetailsByName(String name) {
 
         List<Characters> characters = charactersRepository.findByName(name);
-        if (characters.isEmpty()) {
-            throw new RuntimeException("Details not found for id: " + name);
+
+        if (characters == null || characters.isEmpty()) {
+            return java.util.Collections.emptyList();
         }
 
         List<Map<String, Object>> result = new ArrayList<>();

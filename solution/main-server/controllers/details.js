@@ -19,8 +19,17 @@ async function getDetails(detailsId) {
  * @returns {Promise<Array<Object>>} List of matching anime entries.
  */
 async function getDetailsByName(detailsName) {
-    const r = await axios.get(`${JAVA_SERVER}/details/title/${detailsName}`);
-    return r.data;
+    try {
+        const r = await axios.get(
+            `${JAVA_SERVER}/details/title/${detailsName}`
+        );
+        return r.data;
+    } catch (err) {
+        if (err.response && err.response.status === 404) {
+            return null;
+        }
+        throw err;
+    }
 }
 
 /**

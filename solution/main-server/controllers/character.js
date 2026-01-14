@@ -108,10 +108,17 @@ async function getPersonVoiceWorks(characterId) {
  * @returns {Promise<Array<Object>>} List of matching characters.
  */
 async function getCharacterByName(characterName) {
-    const r = await axios.get(`http://localhost:8082/characters/by-name/${(characterName)}`
-    );
-    return r.data;
+    try {
+        const r = await axios.get(
+            `http://localhost:8082/characters/by-name/${characterName}`
+        );
+        return r.data;
+    } catch (err) {
+        if (err.response && err.response.status === 404) {
+            return null;
+        }
+        throw err;
+    }
 }
-
 
 module.exports = { getCharacter, getCharacterAnimeWorks, getPersonVoiceWorks, getCharacterByName};

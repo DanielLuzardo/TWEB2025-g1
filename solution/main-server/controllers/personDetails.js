@@ -132,8 +132,18 @@ async function getPersonVoiceWorks(personId){
  * @returns {Promise<Array<Object>>} List of matching persons.
  */
 async function getPersonByName(personName) {
-    const r = await axios.get(`http://localhost:8082/personDetails/name/${personName}`);
-    return r.data;
+
+    try {
+        const r = await axios.get(
+            `http://localhost:8082/personDetails/name/${personName}`
+        );
+        return r.data;
+    } catch (err) {
+        if (err.response && err.response.status === 404) {
+            return null;
+        }
+        throw err;
+    }
 }
 
 module.exports = {getPerson, getPersonByName, getPersonAnimeWorks, getPersonVoiceWorks};

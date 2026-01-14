@@ -129,7 +129,7 @@ router.post('/title', async (req, res) => {
         res.render('details', { details, stats, recommendations, charactersAnime });
     } catch (err) {
         console.error(err);
-        res.status(500).render('error', { message: 'Server error' });
+        res.status(500).render('error', { message: 'Anime not found' });
     }
 });
 
