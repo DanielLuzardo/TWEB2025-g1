@@ -132,7 +132,7 @@ router.post('/name', async (req, res) => {
     }
     catch(err){
         console.error(err);
-        res.status(500).render('error', { message: 'Server error' });
+        res.status(500).render('error', { message: 'Person not found' });
     }
 })
 module.exports = router;

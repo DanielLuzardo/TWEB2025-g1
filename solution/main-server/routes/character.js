@@ -127,7 +127,7 @@ router.post('/name', async (req, res) => {
     }
     catch(err){
         console.error(err);
-        res.status(500).render('error', { message: 'Server error' });
+        res.status(404).render('error', { message: 'Character not found' });
     }
 })
 

@@ -34,10 +34,15 @@ public class CharactersController {
             @ApiResponse(responseCode = "200", description = "Character found successfully"),
             @ApiResponse(responseCode = "404", description = "Character not found")
     })
-    public Characters getCharacterById(
+    public ResponseEntity<Characters> getCharacterById(
             @Parameter(description = "MyAnimeList character ID", example = "1")
             @PathVariable Integer id) {
-        return charactersService.getCharacterById(id);
+        Characters character = charactersService.getCharacterById(id);
+
+        if (character == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        return ResponseEntity.ok(character);
     }
 
 
@@ -47,10 +52,15 @@ public class CharactersController {
             @ApiResponse(responseCode = "200", description = "Search completed successfully"),
             @ApiResponse(responseCode = "404", description = "No characters found with that name")
     })
-    public List<Characters> getCharacterByName(
+    public ResponseEntity<List<Characters>> getCharacterByName(
             @Parameter(description = "Character name to search for", example = "Goku")
             @PathVariable String name){
-        return charactersService.getCharacterByName(name);
+        List<Characters> characters = charactersService.getCharacterByName(name);
+
+        if (characters == null || characters.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        return ResponseEntity.ok(characters);
     }
 
 
@@ -96,10 +106,16 @@ public class CharactersController {
             @ApiResponse(responseCode = "200", description = "Summary returned successfully"),
             @ApiResponse(responseCode = "404", description = "Character not found")
     })
-    public Map<String, Object> getBasicDetailsById(
+    public ResponseEntity<Map<String, Object>>  getBasicDetailsById(
             @Parameter(description = "character ID", example = "1")
             @PathVariable Integer id){
-        return charactersService.getBasicDetailsById(id);
+        Map<String, Object> summary = charactersService.getBasicDetailsById(id);
+
+        if (summary == null || summary.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+
+        return ResponseEntity.ok(summary);
     }
 
     @GetMapping("/by-name/{name}")
@@ -108,10 +124,15 @@ public class CharactersController {
             @ApiResponse(responseCode = "200", description = "Search completed successfully"),
             @ApiResponse(responseCode = "404", description = "No characters found with that name")
     })
-    public List<Map<String, Object>> getBasicDetailsByName(
+    public ResponseEntity<List<Map<String, Object>>> getBasicDetailsByName(
             @Parameter(description = "Character name to search for", example = "Spike")
             @PathVariable String name) {
-        return charactersService.getBasicDetailsByName(name);
+        List<Map<String, Object>> results = charactersService.getBasicDetailsByName(name);
+
+        if (results == null || results.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        return ResponseEntity.ok(results);
     }
 
     @GetMapping("/{id}/name")
@@ -120,10 +141,15 @@ public class CharactersController {
             @ApiResponse(responseCode = "200", description = "Character name returned successfully"),
             @ApiResponse(responseCode = "404", description = "Character not found")
     })
-    public Map<String, Object> getCharacterName(
+    public ResponseEntity<Map<String, Object>> getCharacterName(
             @Parameter(description = "Character ID", example = "1")
             @PathVariable Integer id) {
-        return charactersService.getNameById(id);
+        Map<String, Object> name = charactersService.getNameById(id);
+
+        if (name == null || name.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        return ResponseEntity.ok(name);
     }
 
 }

@@ -6,6 +6,8 @@ import com.example.springbootserver.personAlternateName.PersonAlternateName;
 import com.example.springbootserver.personAnimeWorks.PersonAnimeWorks;
 import com.example.springbootserver.personVoiceWorks.PersonVoiceWorks;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -32,10 +34,15 @@ public class PersonDetailsController {
             @ApiResponse(responseCode = "200", description = "Person found successfully"),
             @ApiResponse(responseCode = "404", description = "Person not found")
     })
-    public PersonDetails getPersonDetails(
+    public ResponseEntity<PersonDetails> getPersonDetails(
             @Parameter(description = "BDD person ID", example = "1")
             @PathVariable Integer id){
-        return personDetailsService.getPersonDetailsById(id);
+        PersonDetails person = personDetailsService.getPersonDetailsById(id);
+
+        if (person == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        return ResponseEntity.ok(person);
     }
 
 
@@ -45,10 +52,15 @@ public class PersonDetailsController {
             @ApiResponse(responseCode = "200", description = "Search completed successfully"),
             @ApiResponse(responseCode = "404", description = "No person found with that name")
     })
-    public List<PersonDetails> getPersonDetailsByName(
+    public ResponseEntity<List<PersonDetails>> getPersonDetailsByName(
             @Parameter(description = "Person name to search for", example = "Miyazaki")
             @PathVariable String name){
-        return personDetailsService.getPersonDetailsByName(name);
+        List<PersonDetails> persons = personDetailsService.getPersonDetailsByName(name);
+
+        if (persons == null || persons.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        return ResponseEntity.ok(persons);
     }
 
     @GetMapping("/{id}/alternate-name")
@@ -91,9 +103,15 @@ public class PersonDetailsController {
             @ApiResponse(responseCode = "200", description = "Summary returned successfully"),
             @ApiResponse(responseCode = "404", description = "Person not found")
     })
-    public Map<String, Object> getBasicDetailsById(
+    public ResponseEntity<Map<String, Object>> getBasicDetailsById(
             @Parameter(description = "BDD person ID", example = "1")
             @PathVariable Integer id){
-        return personDetailsService.getBasicDetailsById(id);
+        Map<String, Object> summary =
+                personDetailsService.getBasicDetailsById(id);
+
+        if (summary == null || summary.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        return ResponseEntity.ok(summary);
     }
 }
