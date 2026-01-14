@@ -65,10 +65,6 @@ public class CharactersService {
 
         List<Characters> characters = charactersRepository.findAllByAnimeMalId(detailsId);
 
-        if (characters.isEmpty()) {
-            throw new RuntimeException("Characters not found for anime with id: " + detailsId);
-        }
-
         List<Map<String, Object>> result = new ArrayList<>();
 
         for (Characters character : characters) {

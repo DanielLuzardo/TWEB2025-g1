@@ -83,6 +83,6 @@ public class DetailsService {
      * @return a list of Details matching the given title
      */
     public List<Details> getDetailsByTitle(String title) {
-        return detailsRepository.findByTitle(title);
+        return detailsRepository.findByTitleContainingIgnoreCase(title);
     }
 }

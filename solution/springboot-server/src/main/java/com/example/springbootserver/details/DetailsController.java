@@ -17,6 +17,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
+
 @RestController
 @RequestMapping("/details")
 @Tag(name = "Anime Details", description = "Endpoints for retrieving anime information")
