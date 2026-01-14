@@ -16,11 +16,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Service class responsible for managing the business logic related to Anime Characters.
- *
- * This service acts as a central hub for character data, aggregating information regarding
- * their personal profiles, roles in various anime series, nicknames, and associated voice actors.
- *
+ * Service class for managing anime characters operations.
+ * Provides methods to retrieve character details, anime roles, nicknames, and associated voice actors.
  *
  * @author TWEB2025-g1
  * @version 1.0
@@ -34,13 +31,12 @@ public class CharactersService {
     private final PersonVoiceWorksRepository personVoiceWorksRepository;
 
     /**
-     * Constructs the service with the necessary data repositories.
-     * Dependency injection is handled by Spring.
+     * Constructs a CharactersService with the required repositories.
      *
-     * @param charactersRepository          Repository for accessing core character data.
-     * @param characterAnimeWorksRepository Repository for accessing the anime series a character appears in.
-     * @param characterNicknamesRepository  Repository for accessing character aliases.
-     * @param personVoiceWorksRepository    Repository for accessing voice actor associations.
+     * @param charactersRepository repository for character data access
+     * @param characterAnimeWorksRepository repository for character anime works data access
+     * @param characterNicknamesRepository repository for character nicknames data access
+     * @param personVoiceWorksRepository repository for voice works data access
      */
     @Autowired
     public CharactersService(CharactersRepository charactersRepository,
@@ -54,11 +50,11 @@ public class CharactersService {
     }
 
     /**
-     * Retrieves the full profile of a specific character based on their unique identifier.
+     * Retrieves complete character details by their MyAnimeList ID.
      *
-     * @param id The unique identifier (CharacterMalId) of the character.
-     * @return The {@link Characters} entity containing full details.
-     * @throws RuntimeException if no character is found with the provided ID.
+     * @param id the MyAnimeList character ID
+     * @return the Characters object containing all character information
+     * @throws RuntimeException if no character is found with the given ID
      */
     public Characters getCharacterById(Integer id) {
         return charactersRepository.findById(id)
@@ -66,24 +62,21 @@ public class CharactersService {
     }
 
     /**
-     * Searches for characters that match the provided name.
+     * Searches for characters by their name.
      *
-     * @param name The name (or partial name) to search for.
-     * @return A list of {@link Characters} matching the criteria.
+     * @param name the character name to search for
+     * @return a list of Characters matching the given name
      */
     public List<Characters> getCharacterByName(String name) {
         return charactersRepository.findByName(name);
     }
 
     /**
-     * Retrieves only the name of a character based on their ID.
+     * Retrieves only the name of a character by its ID.
+     * Returns null instead of throwing an exception if not found.
      *
-     * Unlike other retrieval methods in this service, this method returns {@code null}
-     * instead of throwing an exception if the character is not found.
-     *
-     *
-     * @param id The unique identifier of the character.
-     * @return A {@link Map} containing the key "name", or {@code null} if not found.
+     * @param id the MyAnimeList character ID
+     * @return a Map containing the "name" key, or null if not found
      */
     public Map<String, Object> getNameById(Integer id) {
         Characters character = charactersRepository.findById(id).orElse(null);
@@ -96,47 +89,42 @@ public class CharactersService {
     }
 
     /**
-     * Retrieves the list of anime series (works) in which a specific character appears.
-     * This links the character to the anime titles in the database.
+     * Retrieves all anime works where a specific character appears.
      *
-     * @param characterId The unique identifier of the character.
-     * @return A list of {@link CharacterAnimeWorks} entities.
+     * @param characterId the MyAnimeList character ID
+     * @return a list of CharacterAnimeWorks entities
      */
     public List<CharacterAnimeWorks> getCharacterAnimeWorksByCharacterId(Integer characterId) {
         return characterAnimeWorksRepository.findByCharacter_CharacterMalId(characterId);
     }
 
     /**
-     * Retrieves known aliases or nicknames for a specific character.
+     * Retrieves all nicknames or aliases for a specific character.
      *
-     * @param characterId The unique identifier of the character.
-     * @return A list of {@link CharacterNicknames}.
+     * @param characterId the MyAnimeList character ID
+     * @return a list of CharacterNicknames objects
      */
     public List<CharacterNicknames> getCharacterNicknameByCharacterId(Integer characterId) {
         return characterNicknamesRepository.findByCharacter_CharacterMalId(characterId);
     }
 
     /**
-     * Retrieves the voice actors (Seiyuu) associated with this character.
-     * This connects the character entity to the People entity via voice roles.
+     * Retrieves all voice actors (seiyuu) associated with a specific character.
      *
-     * @param characterId The unique identifier of the character.
-     * @return A list of {@link PersonVoiceWorks} representing voice acting roles.
+     * @param characterId the MyAnimeList character ID
+     * @return a list of PersonVoiceWorks entities
      */
     public List<PersonVoiceWorks> getPersonVoiceWorksByCharacterId(Integer characterId) {
         return personVoiceWorksRepository.findByCharacter_CharacterMalId(characterId);
     }
 
     /**
-     * Retrieves a list of characters associated with a specific anime series, tailored for
-     * display on the Anime Details page.
+     * Retrieves a list of characters for a specific anime ID.
+     * Used for displaying character lists on anime detail pages.
      *
-     * This method projects the data into a simplified structure containing only essential UI fields.
-     *
-     *
-     * @param detailsId The ID of the anime (Details) to fetch characters for.
-     * @return A list of {@link Map} objects, where each map contains: "name", "imageUrl", and "id".
-     * @throws RuntimeException if no characters are found for the given anime ID.
+     * @param detailsId the MyAnimeList anime ID (Details ID)
+     * @return a list of Maps, each containing "name", "imageUrl", and "id" keys
+     * @throws RuntimeException if no characters are found for the given anime ID
      */
     public List<Map<String, Object>> getCharactersForAnimeDetails(Integer detailsId) {
 
@@ -160,12 +148,12 @@ public class CharactersService {
     }
 
     /**
-     * Retrieves a simplified set of details for a character by ID.
-     * Useful for lightweight UI components or pop-ups.
+     * Retrieves basic character information (name, image URL, and kanji name).
+     * Used for displaying summary cards without loading full character data.
      *
-     * @param id The unique identifier of the character.
-     * @return A {@link Map} containing: "name", "imageUrl", and "nameKanji".
-     * @throws RuntimeException if the character is not found.
+     * @param id the MyAnimeList character ID
+     * @return a Map containing "name", "imageUrl", and "nameKanji" keys
+     * @throws RuntimeException if no character is found with the given ID
      */
     public Map<String, Object> getBasicDetailsById(Integer id) {
         Characters characters = charactersRepository.findById(id)
@@ -180,12 +168,12 @@ public class CharactersService {
     }
 
     /**
-     * Performs a lightweight search for characters by name, returning simplified data structures.
-     * This is ideal for search bars or autocomplete features.
+     * Searches for basic character information by name.
+     * Used for lightweight search results or autocomplete.
      *
-     * @param name The name to search for.
-     * @return A list of {@link Map} objects containing: "name", "imageUrl", "id", and "nameKanji".
-     * @throws RuntimeException if no characters match the search term.
+     * @param name the character name to search for
+     * @return a list of Maps containing "name", "imageUrl", "id", and "nameKanji" keys
+     * @throws RuntimeException if no characters are found matching the name
      */
     public List<Map<String, Object>> getBasicDetailsByName(String name) {
 

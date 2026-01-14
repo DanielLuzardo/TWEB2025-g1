@@ -17,31 +17,26 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Service class responsible for the business logic related to People (Staff and Voice Actors).
- *
- * This service acts as an orchestrator that aggregates data from multiple repositories,
- * providing access to personal details, alternate names, anime production roles, and voice acting roles.
- *
+ * Service class for managing person (voice actors and staff) related operations.
+ * Provides methods to retrieve person details, alternate names, anime works, and voice acting roles.
  *
  * @author TWEB2025-g1
  * @version 1.0
  */
 @Service
 public class PersonDetailsService {
-
     private final PersonDetailsRepository personDetailsRepository;
     private final PersonAlternateNameRepository personAlternateNameRepository;
     private final PersonAnimeWorksRepository personAnimeWorksRepository;
     private final PersonVoiceWorksRepository personVoiceWorksRepository;
 
     /**
-     * Constructs the service with the necessary data repositories.
-     * Dependency injection is handled by Spring's IoC container.
+     * Constructs a PersonDetailsService with the required repositories.
      *
-     * @param personDetailsRepository       Repository for accessing basic person biographical data.
-     * @param personAlternateNameRepository Repository for accessing alternate names or aliases.
-     * @param personAnimeWorksRepository    Repository for accessing anime production staff roles.
-     * @param personVoiceWorksRepository    Repository for accessing voice acting roles.
+     * @param personDetailsRepository repository for person details data access
+     * @param personAlternateNameRepository repository for alternate names data access
+     * @param personAnimeWorksRepository repository for anime works data access
+     * @param personVoiceWorksRepository repository for voice works data access
      */
     @Autowired
     public PersonDetailsService(PersonDetailsRepository personDetailsRepository,
@@ -55,11 +50,11 @@ public class PersonDetailsService {
     }
 
     /**
-     * Retrieves detailed information about a specific person based on their unique identifier.
+     * Retrieves complete person details by their MyAnimeList ID.
      *
-     * @param id The unique identifier (typically PersonMalId) of the person.
-     * @return The {@link PersonDetails} entity containing biographical information.
-     * @throws RuntimeException if no person is found with the provided ID.
+     * @param id the MyAnimeList person ID
+     * @return the PersonDetails object containing all person information
+     * @throws RuntimeException if no person is found with the given ID
      */
     public PersonDetails getPersonDetailsById(Integer id) {
         return personDetailsRepository.findById(id)
@@ -67,58 +62,52 @@ public class PersonDetailsService {
     }
 
     /**
-     * Searches for people whose names match the provided string.
+     * Searches for persons by their name.
      *
-     * @param name The name of the person to search for.
-     * @return A list of {@link PersonDetails} matching the given name. Returns an empty list if no matches are found.
+     * @param name the name to search for
+     * @return a list of PersonDetails matching the given name
      */
     public List<PersonDetails> getPersonDetailsByName(String name) {
         return personDetailsRepository.findByName(name);
     }
 
     /**
-     * Retrieves a list of alternate names or aliases for a specific person.
-     * This may include nicknames, names in native script (e.g., Kanji), or stage names.
+     * Retrieves all alternate names for a specific person.
      *
-     * @param personId The unique identifier of the person.
-     * @return A list of {@link PersonAlternateName} entities associated with the person.
+     * @param personId the MyAnimeList person ID
+     * @return a list of PersonAlternateName objects for the given person
      */
     public List<PersonAlternateName> getPersonAlternateNameByPersonId(Integer personId) {
         return personAlternateNameRepository.findByPerson_PersonMalId(personId);
     }
 
     /**
-     * Retrieves the history of anime production works (Staff roles) for a specific person.
-     * This includes roles such as director, scriptwriter, key animator, etc.
+     * Retrieves all anime works (staff roles) for a specific person.
      *
-     * @param personId The unique identifier of the person.
-     * @return A list of {@link PersonAnimeWorks} entities detailing the staff roles.
+     * @param personId the MyAnimeList person ID
+     * @return a list of PersonAnimeWorks representing the person's staff contributions
      */
     public List<PersonAnimeWorks> getPersonAnimeWorksByPersonId(Integer personId) {
         return personAnimeWorksRepository.findByPerson_PersonMalId(personId);
     }
 
     /**
-     * Retrieves the history of voice acting roles for a specific person.
-     * This links the person (Voice Actor/Seiyuu) to the characters they have voiced.
+     * Retrieves all voice acting roles for a specific person.
      *
-     * @param personId The unique identifier of the person.
-     * @return A list of {@link PersonVoiceWorks} entities detailing the voice acting roles.
+     * @param personId the MyAnimeList person ID
+     * @return a list of PersonVoiceWorks representing characters voiced by this person
      */
     public List<PersonVoiceWorks> getPersonVoiceWorksByPersonId(Integer personId) {
         return personVoiceWorksRepository.findByPerson_PersonMalId(personId);
     }
 
     /**
-     * Retrieves a simplified subset of details for a specific person.
+     * Retrieves basic person information (name, image URL, and ID).
+     * Used for displaying summary cards without loading full person data.
      *
-     * This method is useful for lightweight UI components (like list items or cards)
-     * that do not require the full biographical data.
-     *
-     *
-     * @param id The unique identifier of the person.
-     * @return A {@link Map} containing specific fields: "name", "imageUrl", and "personMalId".
-     * @throws RuntimeException if the person details are not found.
+     * @param id the MyAnimeList person ID
+     * @return a Map containing "name", "imageUrl", and "personMalId" keys
+     * @throws RuntimeException if no person is found with the given ID
      */
     public Map<String, Object> getBasicDetailsById(Integer id) {
         PersonDetails details = personDetailsRepository.findById(id)
